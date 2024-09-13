@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		62DBCC802C94DE53007B8B09 /* github_repo_list_viewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DBCC7F2C94DE53007B8B09 /* github_repo_list_viewerApp.swift */; };
-		62DBCC822C94DE53007B8B09 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DBCC812C94DE53007B8B09 /* Persistence.swift */; };
 		62DBCC852C94DE53007B8B09 /* github_repo_list_viewer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 62DBCC832C94DE53007B8B09 /* github_repo_list_viewer.xcdatamodeld */; };
 		62DBCC872C94DE53007B8B09 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DBCC862C94DE53007B8B09 /* ContentView.swift */; };
 		62DBCC892C94DE54007B8B09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62DBCC882C94DE54007B8B09 /* Assets.xcassets */; };
@@ -38,7 +37,6 @@
 /* Begin PBXFileReference section */
 		62DBCC7C2C94DE53007B8B09 /* github-repo-list-viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "github-repo-list-viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62DBCC7F2C94DE53007B8B09 /* github_repo_list_viewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = github_repo_list_viewerApp.swift; sourceTree = "<group>"; };
-		62DBCC812C94DE53007B8B09 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		62DBCC842C94DE53007B8B09 /* github_repo_list_viewer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = github_repo_list_viewer.xcdatamodel; sourceTree = "<group>"; };
 		62DBCC862C94DE53007B8B09 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		62DBCC882C94DE54007B8B09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,12 +97,14 @@
 		62DBCC7E2C94DE53007B8B09 /* github-repo-list-viewer */ = {
 			isa = PBXGroup;
 			children = (
-				62DBCC7F2C94DE53007B8B09 /* github_repo_list_viewerApp.swift */,
-				62DBCC812C94DE53007B8B09 /* Persistence.swift */,
-				62DBCC862C94DE53007B8B09 /* ContentView.swift */,
-				62DBCC882C94DE54007B8B09 /* Assets.xcassets */,
-				62DBCC8A2C94DE54007B8B09 /* github_repo_list_viewer.entitlements */,
-				62DBCC832C94DE53007B8B09 /* github_repo_list_viewer.xcdatamodeld */,
+				62DBCCAF2C94DFA3007B8B09 /* App */,
+				62DBCCB62C94E170007B8B09 /* Configuration */,
+				62DBCCB32C94E066007B8B09 /* Components */,
+				62DBCCB22C94E058007B8B09 /* Models */,
+				62DBCCB12C94E051007B8B09 /* Managers */,
+				62DBCCB02C94E045007B8B09 /* Views */,
+				62DBCCB52C94E0A2007B8B09 /* Resources */,
+				62DBCCB72C94E1CD007B8B09 /* Storage */,
 				62DBCC8B2C94DE54007B8B09 /* Preview Content */,
 			);
 			path = "github-repo-list-viewer";
@@ -133,6 +133,67 @@
 				62DBCCA22C94DE54007B8B09 /* github_repo_list_viewerUITestsLaunchTests.swift */,
 			);
 			path = "github-repo-list-viewerUITests";
+			sourceTree = "<group>";
+		};
+		62DBCCAF2C94DFA3007B8B09 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				62DBCC7F2C94DE53007B8B09 /* github_repo_list_viewerApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		62DBCCB02C94E045007B8B09 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				62DBCC862C94DE53007B8B09 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		62DBCCB12C94E051007B8B09 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		62DBCCB22C94E058007B8B09 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		62DBCCB32C94E066007B8B09 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		62DBCCB52C94E0A2007B8B09 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				62DBCC882C94DE54007B8B09 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		62DBCCB62C94E170007B8B09 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				62DBCC8A2C94DE54007B8B09 /* github_repo_list_viewer.entitlements */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		62DBCCB72C94E1CD007B8B09 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				62DBCC832C94DE53007B8B09 /* github_repo_list_viewer.xcdatamodeld */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,7 +327,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				62DBCC802C94DE53007B8B09 /* github_repo_list_viewerApp.swift in Sources */,
-				62DBCC822C94DE53007B8B09 /* Persistence.swift in Sources */,
 				62DBCC872C94DE53007B8B09 /* ContentView.swift in Sources */,
 				62DBCC852C94DE53007B8B09 /* github_repo_list_viewer.xcdatamodeld in Sources */,
 			);
@@ -424,7 +484,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "github-repo-list-viewer/github_repo_list_viewer.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "github-repo-list-viewer/Configuration/github_repo_list_viewer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"github-repo-list-viewer/Preview Content\"";
@@ -462,7 +522,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "github-repo-list-viewer/github_repo_list_viewer.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "github-repo-list-viewer/Configuration/github_repo_list_viewer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"github-repo-list-viewer/Preview Content\"";
