@@ -55,6 +55,8 @@
 		62DBCCBB2C94E76A007B8B09 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		62DBCCBE2C94E954007B8B09 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		62DBCCC02C94E96F007B8B09 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		62DC94942C9762920034E8AC /* NetworkConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = NetworkConfig.xcconfig; sourceTree = "<group>"; };
+		62DC94952C9762F80034E8AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		62DBCC7E2C94DE53007B8B09 /* github-repo-list-viewer */ = {
 			isa = PBXGroup;
 			children = (
+				62DC94952C9762F80034E8AC /* Info.plist */,
 				62DBCCAF2C94DFA3007B8B09 /* App */,
 				62DBCCB62C94E170007B8B09 /* Configuration */,
 				62DBCCB32C94E066007B8B09 /* Components */,
@@ -193,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				62DBCC8A2C94DE54007B8B09 /* github_repo_list_viewer.entitlements */,
+				62DC94942C9762920034E8AC /* NetworkConfig.xcconfig */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -401,6 +405,7 @@
 /* Begin XCBuildConfiguration section */
 		62DBCCA42C94DE54007B8B09 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62DC94942C9762920034E8AC /* NetworkConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -462,6 +467,7 @@
 		};
 		62DBCCA52C94DE54007B8B09 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62DC94942C9762920034E8AC /* NetworkConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -526,6 +532,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "github-repo-list-viewer/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Repo Viewer";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -567,6 +574,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "github-repo-list-viewer/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Repo Viewer";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
