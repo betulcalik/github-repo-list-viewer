@@ -26,6 +26,8 @@
 		62DC94C22C978ECA0034E8AC /* APIKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC94C12C978ECA0034E8AC /* APIKeyManager.swift */; };
 		62DC94C62C97926D0034E8AC /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC94C52C97926D0034E8AC /* UserViewModel.swift */; };
 		62DC94C82C9792F10034E8AC /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC94C72C9792F10034E8AC /* PreviewProvider.swift */; };
+		62DC94CC2C979CEF0034E8AC /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC94CB2C979CEF0034E8AC /* CustomButton.swift */; };
+		62DC94CE2C979F9A0034E8AC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC94CD2C979F9A0034E8AC /* Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		62DC94C12C978ECA0034E8AC /* APIKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeyManager.swift; sourceTree = "<group>"; };
 		62DC94C52C97926D0034E8AC /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		62DC94C72C9792F10034E8AC /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
+		62DC94CB2C979CEF0034E8AC /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		62DC94CD2C979F9A0034E8AC /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,7 @@
 				62DC94952C9762F80034E8AC /* Info.plist */,
 				62DBCCAF2C94DFA3007B8B09 /* App */,
 				62DBCCB62C94E170007B8B09 /* Configuration */,
+				62DC94CA2C979CD90034E8AC /* Components */,
 				62DC94B62C97865C0034E8AC /* Models */,
 				62DBCCB12C94E051007B8B09 /* Managers */,
 				62DC94C42C97925E0034E8AC /* ViewModels */,
@@ -173,11 +178,9 @@
 		62DBCCBA2C94E759007B8B09 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				621CDD182C96FFCB0052194A /* HTTPMethod.swift */,
-				621CDD1A2C97009A0052194A /* HTTPHeader.swift */,
-				621CDD1C2C9701550052194A /* MIMEType.swift */,
-				62DBCCBB2C94E76A007B8B09 /* NetworkError.swift */,
+				62DC94C92C9796330034E8AC /* NetworkUtilities */,
 				62DC94C72C9792F10034E8AC /* PreviewProvider.swift */,
+				62DC94CD2C979F9A0034E8AC /* Colors.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -229,6 +232,25 @@
 				62DC94C52C97926D0034E8AC /* UserViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		62DC94C92C9796330034E8AC /* NetworkUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				621CDD182C96FFCB0052194A /* HTTPMethod.swift */,
+				621CDD1A2C97009A0052194A /* HTTPHeader.swift */,
+				621CDD1C2C9701550052194A /* MIMEType.swift */,
+				62DBCCBB2C94E76A007B8B09 /* NetworkError.swift */,
+			);
+			path = NetworkUtilities;
+			sourceTree = "<group>";
+		};
+		62DC94CA2C979CD90034E8AC /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				62DC94CB2C979CEF0034E8AC /* CustomButton.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -342,11 +364,13 @@
 				62DC94C62C97926D0034E8AC /* UserViewModel.swift in Sources */,
 				62DC94B82C9786920034E8AC /* GetUserModel.swift in Sources */,
 				621CDD1B2C97009A0052194A /* HTTPHeader.swift in Sources */,
+				62DC94CE2C979F9A0034E8AC /* Colors.swift in Sources */,
 				62DC94C22C978ECA0034E8AC /* APIKeyManager.swift in Sources */,
 				62DBCC852C94DE53007B8B09 /* github_repo_list_viewer.xcdatamodeld in Sources */,
 				62DBCCBF2C94E954007B8B09 /* String+Extensions.swift in Sources */,
 				62DC94B42C9785620034E8AC /* GithubManager.swift in Sources */,
 				62DBCCBC2C94E76A007B8B09 /* NetworkError.swift in Sources */,
+				62DC94CC2C979CEF0034E8AC /* CustomButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

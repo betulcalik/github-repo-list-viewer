@@ -22,8 +22,10 @@ struct github_repo_list_viewerApp: App {
     
     var body: some Scene {
         WindowGroup {
-            SearchUserView()
-                .environmentObject(userViewModel)
+            NavigationStack {
+                SearchUserView()
+                    .environmentObject(userViewModel)
+            }
         }
     }
 }
