@@ -21,7 +21,7 @@ final class NetworkManager: NetworkManagerProtocol {
         self.baseURL = baseURL
     }
     
-    func fetch<T>(from path: String? = nil) -> AnyPublisher<T, NetworkError> where T: Decodable {
+    func fetch<T: Decodable>(from path: String?) -> AnyPublisher<T, NetworkError> {
         let fullURL: URL
         
         if let path = path, !path.isEmpty {
@@ -57,7 +57,7 @@ final class NetworkManager: NetworkManagerProtocol {
             .eraseToAnyPublisher()
     }
     
-    func post<T, U>(to path: String? = nil, body: U) -> AnyPublisher<T, NetworkError> where T: Decodable, U: Encodable {
+    func post<T: Decodable, U: Encodable>(to path: String?, body: U) -> AnyPublisher<T, NetworkError> {
         let fullURL: URL
         
         if let path = path, !path.isEmpty {
