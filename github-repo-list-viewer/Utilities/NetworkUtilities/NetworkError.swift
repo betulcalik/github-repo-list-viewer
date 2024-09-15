@@ -11,8 +11,8 @@ enum NetworkError: Error {
     case invalidURL
     case invalidResponse
     case serverError(statusCode: Int)
-    case decodingError(Error)
-    case unknown(Error)
+    case decodingError
+    case unknown
     
     var errorDescription: String? {
         switch self {
@@ -22,10 +22,10 @@ enum NetworkError: Error {
             return "invalid_server_response".localized()
         case .serverError(let statusCode):
             return "server_error".localized(with: statusCode)
-        case .decodingError(let error):
-            return "failed_data_decode".localized(with: error.localizedDescription)
-        case .unknown(let error):
-            return "unknown_error".localized(with: error.localizedDescription)
+        case .decodingError:
+            return "failed_data_decode".localized()
+        case .unknown:
+            return "unknown_error".localized()
         }
     }
 }

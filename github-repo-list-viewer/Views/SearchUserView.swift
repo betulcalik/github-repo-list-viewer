@@ -30,6 +30,18 @@ struct SearchUserView: View {
             Spacer()
         }
         .background(Colors.backgroundColor)
+        .alert(isPresented: $viewModel.showAlert) {
+            Alert(
+                title: Text("error".localized()),
+                message: Text(viewModel.getUserError?.errorDescription ?? "unknown_error".localized()),
+                dismissButton: .default(Text("ok".localized()))
+            )
+        }
+        .overlay {
+            if viewModel.isLoading {
+                LoadingView()
+            }
+        }
     }
 }
 

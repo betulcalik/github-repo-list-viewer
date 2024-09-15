@@ -28,6 +28,7 @@
 		62DC94C82C9792F10034E8AC /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC94C72C9792F10034E8AC /* PreviewProvider.swift */; };
 		62DC94CC2C979CEF0034E8AC /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC94CB2C979CEF0034E8AC /* CustomButton.swift */; };
 		62DC94CE2C979F9A0034E8AC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC94CD2C979F9A0034E8AC /* Colors.swift */; };
+		62DC94D02C97A1BD0034E8AC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC94CF2C97A1BD0034E8AC /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		62DC94C72C9792F10034E8AC /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 		62DC94CB2C979CEF0034E8AC /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		62DC94CD2C979F9A0034E8AC /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		62DC94CF2C97A1BD0034E8AC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				62DC94CB2C979CEF0034E8AC /* CustomButton.swift */,
+				62DC94CF2C97A1BD0034E8AC /* LoadingView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				621CDD1D2C9701550052194A /* MIMEType.swift in Sources */,
 				62DBCC802C94DE53007B8B09 /* github_repo_list_viewerApp.swift in Sources */,
 				62DC94BE2C978B510034E8AC /* SearchUserView.swift in Sources */,
+				62DC94D02C97A1BD0034E8AC /* LoadingView.swift in Sources */,
 				621CDD192C96FFCB0052194A /* HTTPMethod.swift in Sources */,
 				62DC94C82C9792F10034E8AC /* PreviewProvider.swift in Sources */,
 				62DC94C62C97926D0034E8AC /* UserViewModel.swift in Sources */,

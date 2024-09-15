@@ -63,10 +63,10 @@ final class NetworkManager: NetworkManagerProtocol {
             .decode(type: T.self, decoder: JSONDecoder())
             .mapError { error in
                 if let decodingError = error as? DecodingError {
-                    return NetworkError.decodingError(decodingError)
+                    return NetworkError.decodingError
                 }
                 
-                return NetworkError.unknown(error)
+                return NetworkError.unknown
             }
             .eraseToAnyPublisher()
     }
@@ -96,7 +96,7 @@ final class NetworkManager: NetworkManagerProtocol {
         do {
             request.httpBody = try JSONEncoder().encode(body)
         } catch {
-            return Fail(error: NetworkError.decodingError(error)).eraseToAnyPublisher()
+            return Fail(error: NetworkError.decodingError).eraseToAnyPublisher()
         }
         
         return urlSession.dataTaskPublisher(for: request)
@@ -114,10 +114,10 @@ final class NetworkManager: NetworkManagerProtocol {
             .decode(type: T.self, decoder: JSONDecoder())
             .mapError { error in
                 if let decodingError = error as? DecodingError {
-                    return NetworkError.decodingError(decodingError)
+                    return NetworkError.decodingError
                 }
                 
-                return NetworkError.unknown(error)
+                return NetworkError.unknown
             }
             .eraseToAnyPublisher()
     }

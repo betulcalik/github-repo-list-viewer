@@ -1,19 +1,36 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hata"
+          }
+        }
+      }
+    },
     "failed_data_decode" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to decode the data:  %@"
+            "value" : "Failed to decode the data."
           }
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Veri çözme başarısız: %@ "
+            "state" : "needs_review",
+            "value" : "Veri çözme başarısız. "
           }
         }
       }
@@ -48,6 +65,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verilen URL geçersiz."
+          }
+        }
+      }
+    },
+    "ok" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tamam"
           }
         }
       }
@@ -109,13 +143,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "An unknown error occurred: %@"
+            "value" : "An unknown error occurred."
           }
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bilinmeyen bir hata oluştu: %@"
+            "state" : "needs_review",
+            "value" : "Bilinmeyen bir hata oluştu."
           }
         }
       }

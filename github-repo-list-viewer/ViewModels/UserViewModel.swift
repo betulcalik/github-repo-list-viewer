@@ -14,6 +14,11 @@ final class UserViewModel: ObservableObject {
     private let githubManager: GithubManagerProtocol
     private var cancellables = Set<AnyCancellable>()
     
+    @Published var isLoading: Bool = false
+    @Published var showAlert: Bool = false
+    
+    @Published var getUserError: NetworkError?
+    
     // MARK: Init
     init(githubManager: GithubManagerProtocol) {
         self.githubManager = githubManager
@@ -22,16 +27,21 @@ final class UserViewModel: ObservableObject {
     // MARK: Public Methods
     func getUser(username: String) {
         let model = GetUserRequestModel(username: username)
+        isLoading = true
         
         githubManager.getUser(model: model)
+            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
+                guard let self = self else { return }
+                isLoading = false
+                
                 switch completion {
                 case .finished:
-                    // Handle successful completion
                     break
                 case .failure(let error):
-                    // Handle error
                     debugPrint("Error: \(error)")
+                    showAlert = true
+                    getUserError = error
                 }
             }, receiveValue: { [weak self] response in
                 guard let self = self else { return }
