@@ -19,7 +19,8 @@
 		62DBCCBC2C94E76A007B8B09 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DBCCBB2C94E76A007B8B09 /* NetworkError.swift */; };
 		62DBCCBF2C94E954007B8B09 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DBCCBE2C94E954007B8B09 /* String+Extensions.swift */; };
 		62DBCCC12C94E96F007B8B09 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 62DBCCC02C94E96F007B8B09 /* Localizable.xcstrings */; };
-		62DC94A02C976D600034E8AC /* github_repo_list_viewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC949F2C976D600034E8AC /* github_repo_list_viewerTests.swift */; };
+		62DC94A92C976EE10034E8AC /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC94A82C976EE10034E8AC /* NetworkManagerTests.swift */; };
+		62DC94B22C9777130034E8AC /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC94B12C9777130034E8AC /* MockURLProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +50,8 @@
 		62DBCCC02C94E96F007B8B09 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		62DC94952C9762F80034E8AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		62DC949D2C976D600034E8AC /* github-repo-list-viewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "github-repo-list-viewerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		62DC949F2C976D600034E8AC /* github_repo_list_viewerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = github_repo_list_viewerTests.swift; sourceTree = "<group>"; };
+		62DC94A82C976EE10034E8AC /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
+		62DC94B12C9777130034E8AC /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,9 +186,18 @@
 		62DC949E2C976D600034E8AC /* github-repo-list-viewerTests */ = {
 			isa = PBXGroup;
 			children = (
-				62DC949F2C976D600034E8AC /* github_repo_list_viewerTests.swift */,
+				62DC94B02C9776FB0034E8AC /* Mock */,
+				62DC94A82C976EE10034E8AC /* NetworkManagerTests.swift */,
 			);
 			path = "github-repo-list-viewerTests";
+			sourceTree = "<group>";
+		};
+		62DC94B02C9776FB0034E8AC /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				62DC94B12C9777130034E8AC /* MockURLProtocol.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,7 +318,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62DC94A02C976D600034E8AC /* github_repo_list_viewerTests.swift in Sources */,
+				62DC94A92C976EE10034E8AC /* NetworkManagerTests.swift in Sources */,
+				62DC94B22C9777130034E8AC /* MockURLProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

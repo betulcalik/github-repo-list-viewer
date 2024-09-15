@@ -15,12 +15,17 @@ protocol NetworkManagerProtocol {
 
 final class NetworkManager: NetworkManagerProtocol {
     
+    // MARK: Properties
+    private let urlSession: URLSession
     private let baseURL: URL
     
-    init(baseURL: URL) {
+    // MARK: Init
+    init(urlSession: URLSession, baseURL: URL) {
+        self.urlSession = urlSession
         self.baseURL = baseURL
     }
     
+    // MARK: Public Methods
     func fetch<T: Decodable>(from path: String?) -> AnyPublisher<T, NetworkError> {
         let fullURL: URL
         
@@ -34,7 +39,7 @@ final class NetworkManager: NetworkManagerProtocol {
             return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
         }
 
-        return URLSession.shared.dataTaskPublisher(for: url)
+        return urlSession.dataTaskPublisher(for: url)
             .tryMap { result in
                 guard let httpResponse = result.response as? HTTPURLResponse else {
                     throw NetworkError.invalidResponse
@@ -81,7 +86,7 @@ final class NetworkManager: NetworkManagerProtocol {
             return Fail(error: NetworkError.decodingError(error)).eraseToAnyPublisher()
         }
         
-        return URLSession.shared.dataTaskPublisher(for: request)
+        return urlSession.dataTaskPublisher(for: request)
             .tryMap { result in
                 guard let httpResponse = result.response as? HTTPURLResponse else {
                     throw NetworkError.invalidResponse
