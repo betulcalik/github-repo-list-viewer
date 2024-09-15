@@ -19,10 +19,10 @@
 		62DBCCBC2C94E76A007B8B09 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DBCCBB2C94E76A007B8B09 /* NetworkError.swift */; };
 		62DBCCBF2C94E954007B8B09 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DBCCBE2C94E954007B8B09 /* String+Extensions.swift */; };
 		62DBCCC12C94E96F007B8B09 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 62DBCCC02C94E96F007B8B09 /* Localizable.xcstrings */; };
+		62DC94A02C976D600034E8AC /* github_repo_list_viewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC949F2C976D600034E8AC /* github_repo_list_viewerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-			remoteGlobalIDString = 62DBCC7B2C94DE53007B8B09;
 		62DC94A12C976D600034E8AC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 62DBCC742C94DE53007B8B09 /* Project object */;
