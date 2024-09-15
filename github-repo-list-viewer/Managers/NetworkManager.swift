@@ -18,11 +18,13 @@ final class NetworkManager: NetworkManagerProtocol {
     // MARK: Properties
     private let urlSession: URLSession
     private let baseURL: URL
+    private var apiKey: String?
     
     // MARK: Init
-    init(urlSession: URLSession, baseURL: URL) {
+    init(urlSession: URLSession, baseURL: URL, apiKey: String? = nil) {
         self.urlSession = urlSession
         self.baseURL = baseURL
+        self.apiKey = apiKey
     }
     
     // MARK: Public Methods
@@ -38,8 +40,15 @@ final class NetworkManager: NetworkManagerProtocol {
         guard let url = URL(string: fullURL.absoluteString) else {
             return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
         }
+        
+        var request = URLRequest(url: url)
+        
+        if let apiKey = apiKey {
+            request.setValue("Bearer \(apiKey)", 
+                             forHTTPHeaderField: HTTPHeader.authorization.rawValue)
+        }
 
-        return urlSession.dataTaskPublisher(for: url)
+        return urlSession.dataTaskPublisher(for: request)
             .tryMap { result in
                 guard let httpResponse = result.response as? HTTPURLResponse else {
                     throw NetworkError.invalidResponse
@@ -79,6 +88,10 @@ final class NetworkManager: NetworkManagerProtocol {
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue(MIMEType.JSON.rawValue,
                          forHTTPHeaderField: HTTPHeader.contentType.rawValue)
+        
+        if let apiKey = apiKey {
+            request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        }
         
         do {
             request.httpBody = try JSONEncoder().encode(body)

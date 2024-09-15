@@ -1,0 +1,21 @@
+//
+//  PreviewProvider.swift
+//  github-repo-list-viewer
+//
+//  Created by Betül Çalık on 16.09.2024.
+//
+
+import Foundation
+
+final class PreviewProvider {
+    
+    static let shared = PreviewProvider()
+    
+    let userViewModel = UserViewModel(githubManager: GithubManager(
+                                            networkManager:
+                                                NetworkManager(urlSession: URLSession.shared,
+                                                               baseURL: URL(string: "https://api.github.com")!,
+                                                               apiKey: APIKeyManager.shared.getGithubAPIKey())))
+    
+    private init() { }
+}
