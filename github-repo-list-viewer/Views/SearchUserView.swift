@@ -76,5 +76,5 @@ extension SearchUserView {
 
 #Preview {
     SearchUserView()
-        .environmentObject(PreviewProvider.shared.userViewModel)
+        .environmentObject(PreviewProvider.shared.searchUserViewModel)
 }

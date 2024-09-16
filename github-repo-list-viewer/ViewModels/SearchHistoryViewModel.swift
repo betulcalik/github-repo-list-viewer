@@ -23,7 +23,7 @@ final class SearchHistoryViewModel: ObservableObject {
         fetchUsers()
     }
     
-    // MARK: - Fetch Users
+    // MARK: - Public Methods
     func fetchUsers() {
         githubDataModelManager.fetchAllUsers()
             .receive(on: DispatchQueue.main)

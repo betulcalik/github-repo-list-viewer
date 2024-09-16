@@ -12,7 +12,7 @@ final class PreviewProvider {
     
     static let shared = PreviewProvider()
     
-    let userViewModel = SearchUserViewModel(
+    let searchUserViewModel = SearchUserViewModel(
         githubManager:
             GithubManager(
                 networkManager:

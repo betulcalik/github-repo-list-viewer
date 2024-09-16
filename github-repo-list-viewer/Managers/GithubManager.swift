@@ -10,6 +10,7 @@ import Combine
 
 protocol GithubManagerProtocol {
     func getUser(model: GetUserRequestModel) -> AnyPublisher<GetUserResponseModel, NetworkError>
+    func getUserRepositories(model: GetUserRepositoryRequestModel) -> AnyPublisher<[GetUserRepositoryResponseModel], NetworkError>
 }
 
 final class GithubManager: GithubManagerProtocol {
@@ -27,4 +28,7 @@ final class GithubManager: GithubManagerProtocol {
         networkManager.fetch(from: "/users/" + model.username)
     }
     
+    func getUserRepositories(model: GetUserRepositoryRequestModel) -> AnyPublisher<[GetUserRepositoryResponseModel], NetworkError> {
+        networkManager.fetch(from: "/users/" + model.username + "/repos")
+    }
 }

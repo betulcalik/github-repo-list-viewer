@@ -23,22 +23,16 @@ struct SearchHistoryView: View {
                 } else {
                     List {
                         ForEach(viewModel.users) { user in
-                            HStack {
-                                Image(systemName: "person")
-                                    .foregroundStyle(Colors.textColor.opacity(0.2))
-                                
-                                Text(user.username ?? "Unknown User")
-                                    .foregroundStyle(Colors.textColor)
-                                
-                                Spacer()
-                                
-                                Image(systemName: "chevron.right")
-                                    .foregroundStyle(Colors.textColor.opacity(0.4))
+                            NavigationLink(destination: UserDetailView().environmentObject(UserDetailViewModel(user: user, githubManager: GithubManager(networkManager: NetworkManager(urlSession: URLSession.shared, baseURL: URL(string: "https://api.github.com")!, apiKey: APIKeyManager.shared.getGithubAPIKey()))))) {
+                                HStack {
+                                    Image(systemName: "person")
+                                        .foregroundStyle(Colors.textColor.opacity(0.2))
+                                    
+                                    Text(user.username ?? "Unknown User")
+                                        .foregroundStyle(Colors.textColor)
+                                }
+                                .frame(height: 36)
                             }
-                            .alignmentGuide(.listRowSeparatorLeading) { viewDimensions in
-                                return 0
-                            }
-                            .frame(height: 36)
                         }
                     }
                 }
