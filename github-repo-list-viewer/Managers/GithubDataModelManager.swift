@@ -47,13 +47,9 @@ final class GithubDataModelManager: GithubDataModelManagerProtocol {
                 case .finished:
                     break
                 case .failure(let error):
-                    debugPrint("Error during saveUser operation: \(error.localizedDescription)")
+                    debugPrint("Error during fetch user operation: \(error.localizedDescription)")
                 }
-            }, receiveValue: { success in
-                if success {
-                    debugPrint("User successfully saved: \(model)")
-                }
-            })
+            }, receiveValue: { success in })
             .store(in: &cancellables)
     }
     

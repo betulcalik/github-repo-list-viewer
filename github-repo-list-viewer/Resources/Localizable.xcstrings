@@ -131,6 +131,17 @@
         }
       }
     },
+    "search_history" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search History"
+          }
+        }
+      }
+    },
     "server_error" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -148,9 +159,6 @@
         }
       }
     },
-    "There is no user" : {
-
-    },
     "unknown_error" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -164,6 +172,17 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Bilinmeyen bir hata oluştu."
+          }
+        }
+      }
+    },
+    "user_history_not_available" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No user history available."
           }
         }
       }

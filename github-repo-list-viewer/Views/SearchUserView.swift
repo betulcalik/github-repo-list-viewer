@@ -13,34 +13,36 @@ struct SearchUserView: View {
     @State private var username: String = ""
     
     var body: some View {
-        VStack(spacing: 10) {
-            Image("githubIcon")
-            
-            Text("search_github_repositories".localized())
-                .font(.title2)
-                .foregroundStyle(Colors.textColor)
-                .multilineTextAlignment(.center)
-                .padding([.horizontal, .bottom])
-            
-            VStack(spacing: 20) {
-                usernameTextField
-                searchButton
+        NavigationStack {
+            VStack(spacing: 10) {
+                Image("githubIcon")
+                
+                Text("search_github_repositories".localized())
+                    .font(.title2)
+                    .foregroundStyle(Colors.textColor)
+                    .multilineTextAlignment(.center)
+                    .padding([.horizontal, .bottom])
+                
+                VStack(spacing: 20) {
+                    usernameTextField
+                    searchButton
+                }
+                
+                Spacer()
             }
-            
-            Spacer()
-        }
-        .background(Colors.backgroundColor)
-        .alert(isPresented: $viewModel.showAlert) {
-            Alert(
-                title: Text("error".localized()),
-                message: Text(viewModel.getUserError?.errorDescription ?? "unknown_error".localized()),
-                dismissButton: .default(Text("ok".localized()))
-            )
-        }
-        .overlay {
-            if viewModel.isLoading {
-                LoadingView()
+            .background(Colors.backgroundColor)
+            .alert(isPresented: $viewModel.showAlert) {
+                Alert(
+                    title: Text("error".localized()),
+                    message: Text(viewModel.getUserError?.errorDescription ?? "unknown_error".localized()),
+                    dismissButton: .default(Text("ok".localized()))
+                )
             }
+            .overlay {
+                if viewModel.isLoading {
+                    LoadingView()
+                }
+        }
         }
     }
 }
