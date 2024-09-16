@@ -11,7 +11,8 @@ import CoreData
 @main
 struct github_repo_list_viewerApp: App {
     
-    @StateObject private var userViewModel: UserViewModel
+    @StateObject private var searchUserViewModel: SearchUserViewModel
+    @StateObject private var userHistoryViewModel: UserHistoryViewModel
     
     init() {
         let githubNetworkManager = NetworkManager(urlSession: URLSession.shared,
@@ -23,16 +24,16 @@ struct github_repo_list_viewerApp: App {
         let githubCoreDataManager = CoreDataManager(container: githubDataModelContainer)
         let githubDataModelManager = GithubDataModelManager(coreDataManager: githubCoreDataManager)
         
-        _userViewModel = StateObject(wrappedValue: UserViewModel(githubManager: githubManager,
-                                                                 githubDataModelManager: githubDataModelManager))
+        _searchUserViewModel = StateObject(wrappedValue: SearchUserViewModel(githubManager: githubManager,
+                                                                       githubDataModelManager: githubDataModelManager))
+        _userHistoryViewModel = StateObject(wrappedValue: UserHistoryViewModel(githubDataModelManager: githubDataModelManager))
     }
     
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                SearchUserView()
-                    .environmentObject(userViewModel)
-            }
+            BaseView()
+                .environmentObject(searchUserViewModel)
+                .environmentObject(userHistoryViewModel)
         }
     }
 }

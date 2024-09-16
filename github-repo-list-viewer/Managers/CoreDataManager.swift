@@ -20,9 +20,6 @@ final class CoreDataManager: CoreDataManagerProtocol {
     
     // MARK: Properties
     let container: NSPersistentContainer
-    private var context: NSManagedObjectContext {
-        return container.viewContext
-    }
     
     // MARK: Init
     init(container: NSPersistentContainer) {
@@ -44,16 +41,16 @@ final class CoreDataManager: CoreDataManagerProtocol {
     
     // MARK: Public Methods
     func fetch<T: NSManagedObject>(entity: T.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> AnyPublisher<[T], Error> {
-        let backgroundContext = container.newBackgroundContext()
-        
         return Future<[T], Error> { promise in
-            backgroundContext.perform {
+            let mainContext = self.container.viewContext
+            
+            mainContext.perform {
                 let request = T.fetchRequest()
                 request.predicate = predicate
                 request.sortDescriptors = sortDescriptors
                 
                 do {
-                    let results = try backgroundContext.fetch(request) as? [T] ?? []
+                    let results = try mainContext.fetch(request) as? [T] ?? []
                     promise(.success(results))
                 } catch {
                     promise(.failure(error))

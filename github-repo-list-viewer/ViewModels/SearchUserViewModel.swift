@@ -1,5 +1,5 @@
 //
-//  UserViewModel.swift
+//  SearchUserViewModel.swift
 //  github-repo-list-viewer
 //
 //  Created by Betül Çalık on 16.09.2024.
@@ -8,17 +8,15 @@
 import Foundation
 import Combine
 
-final class UserViewModel: ObservableObject {
+final class SearchUserViewModel: ObservableObject {
     
     // MARK: Properties
     private let githubManager: GithubManagerProtocol
     private let githubDataModelManager: GithubDataModelManagerProtocol
-    
     private var cancellables = Set<AnyCancellable>()
     
     @Published var isLoading: Bool = false
     @Published var showAlert: Bool = false
-    
     @Published var getUserError: NetworkError?
     
     // MARK: Init
@@ -48,7 +46,7 @@ final class UserViewModel: ObservableObject {
                 }
             }, receiveValue: { [weak self] response in
                 guard let self = self else { return }
-                githubDataModelManager.saveUser(responseModel: response)
+                githubDataModelManager.saveUser(model: response)
             })
             .store(in: &cancellables)
     }

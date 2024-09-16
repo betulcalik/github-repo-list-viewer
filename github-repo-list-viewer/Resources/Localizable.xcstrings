@@ -35,6 +35,17 @@
         }
       }
     },
+    "history" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "History"
+          }
+        }
+      }
+    },
     "invalid_server_response" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -136,6 +147,9 @@
           }
         }
       }
+    },
+    "There is no user" : {
+
     },
     "unknown_error" : {
       "extractionState" : "manual",

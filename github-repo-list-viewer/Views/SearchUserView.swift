@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchUserView: View {
     
-    @EnvironmentObject var viewModel: UserViewModel
+    @EnvironmentObject var viewModel: SearchUserViewModel
     @State private var username: String = ""
     
     var body: some View {
