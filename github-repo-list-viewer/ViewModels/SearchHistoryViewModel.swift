@@ -1,5 +1,5 @@
 //
-//  UserHistoryViewModel.swift
+//  SearchHistoryViewModel.swift
 //  github-repo-list-viewer
 //
 //  Created by Betül Çalık on 16.09.2024.
@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 import Combine
 
-final class UserHistoryViewModel: ObservableObject {
+final class SearchHistoryViewModel: ObservableObject {
     
     // MARK: - Properties
     private let githubDataModelManager: GithubDataModelManagerProtocol

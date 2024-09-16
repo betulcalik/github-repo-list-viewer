@@ -1,5 +1,5 @@
 //
-//  UserHistoryView.swift
+//  SearchHistoryView.swift
 //  github-repo-list-viewer
 //
 //  Created by Betül Çalık on 16.09.2024.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct UserHistoryView: View {
+struct SearchHistoryView: View {
     
-    @EnvironmentObject var viewModel: UserHistoryViewModel
+    @EnvironmentObject var viewModel: SearchHistoryViewModel
     
     var body: some View {
         NavigationStack {
@@ -52,6 +52,6 @@ struct UserHistoryView: View {
 }
 
 #Preview {
-    UserHistoryView()
+    SearchHistoryView()
         .environmentObject(PreviewProvider.shared.userHistoryViewModel)
 }

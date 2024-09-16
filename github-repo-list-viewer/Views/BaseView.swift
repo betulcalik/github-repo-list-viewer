@@ -19,7 +19,7 @@ struct BaseView: View {
                           systemImage: "magnifyingglass")
                 }
             
-            UserHistoryView()
+            SearchHistoryView()
                 .background(Colors.backgroundColor)
                 .tabItem {
                     Label("history".localized(),

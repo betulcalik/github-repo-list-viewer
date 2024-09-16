@@ -12,7 +12,7 @@ import CoreData
 struct github_repo_list_viewerApp: App {
     
     @StateObject private var searchUserViewModel: SearchUserViewModel
-    @StateObject private var userHistoryViewModel: UserHistoryViewModel
+    @StateObject private var userHistoryViewModel: SearchHistoryViewModel
     
     init() {
         let githubNetworkManager = NetworkManager(urlSession: URLSession.shared,
@@ -26,7 +26,7 @@ struct github_repo_list_viewerApp: App {
         
         _searchUserViewModel = StateObject(wrappedValue: SearchUserViewModel(githubManager: githubManager,
                                                                        githubDataModelManager: githubDataModelManager))
-        _userHistoryViewModel = StateObject(wrappedValue: UserHistoryViewModel(githubDataModelManager: githubDataModelManager))
+        _userHistoryViewModel = StateObject(wrappedValue: SearchHistoryViewModel(githubDataModelManager: githubDataModelManager))
     }
     
     var body: some Scene {

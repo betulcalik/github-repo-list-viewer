@@ -29,7 +29,7 @@ final class PreviewProvider {
             )
     )
     
-    let userHistoryViewModel = UserHistoryViewModel(
+    let userHistoryViewModel = SearchHistoryViewModel(
         githubDataModelManager:
             GithubDataModelManager(
                 coreDataManager:
