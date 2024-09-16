@@ -12,6 +12,8 @@ final class UserViewModel: ObservableObject {
     
     // MARK: Properties
     private let githubManager: GithubManagerProtocol
+    private let githubDataModelManager: GithubDataModelManagerProtocol
+    
     private var cancellables = Set<AnyCancellable>()
     
     @Published var isLoading: Bool = false
@@ -20,8 +22,9 @@ final class UserViewModel: ObservableObject {
     @Published var getUserError: NetworkError?
     
     // MARK: Init
-    init(githubManager: GithubManagerProtocol) {
+    init(githubManager: GithubManagerProtocol, githubDataModelManager: GithubDataModelManagerProtocol) {
         self.githubManager = githubManager
+        self.githubDataModelManager = githubDataModelManager
     }
     
     // MARK: Public Methods
@@ -45,7 +48,7 @@ final class UserViewModel: ObservableObject {
                 }
             }, receiveValue: { [weak self] response in
                 guard let self = self else { return }
-                debugPrint("Response: \(response)")
+                githubDataModelManager.saveUser(responseModel: response)
             })
             .store(in: &cancellables)
     }

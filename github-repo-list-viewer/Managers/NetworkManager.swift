@@ -62,7 +62,7 @@ final class NetworkManager: NetworkManagerProtocol {
             }
             .decode(type: T.self, decoder: JSONDecoder())
             .mapError { error in
-                if let decodingError = error as? DecodingError {
+                if error is DecodingError {
                     return NetworkError.decodingError
                 }
                 
@@ -113,7 +113,7 @@ final class NetworkManager: NetworkManagerProtocol {
             }
             .decode(type: T.self, decoder: JSONDecoder())
             .mapError { error in
-                if let decodingError = error as? DecodingError {
+                if error is DecodingError {
                     return NetworkError.decodingError
                 }
                 

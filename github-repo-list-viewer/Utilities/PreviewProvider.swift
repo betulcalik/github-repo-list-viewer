@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 final class PreviewProvider {
     
@@ -15,7 +16,10 @@ final class PreviewProvider {
                                             networkManager:
                                                 NetworkManager(urlSession: URLSession.shared,
                                                                baseURL: URL(string: "https://api.github.com")!,
-                                                               apiKey: APIKeyManager.shared.getGithubAPIKey())))
+                                                               apiKey: APIKeyManager.shared.getGithubAPIKey())),
+                                      githubDataModelManager: GithubDataModelManager(
+                                        coreDataManager:
+                                            CoreDataManager(container: NSPersistentContainer(name: "GithubDataModel"))))
     
     private init() { }
 }

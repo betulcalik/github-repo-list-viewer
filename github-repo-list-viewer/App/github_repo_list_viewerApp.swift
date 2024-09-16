@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 @main
 struct github_repo_list_viewerApp: App {
@@ -13,11 +14,17 @@ struct github_repo_list_viewerApp: App {
     @StateObject private var userViewModel: UserViewModel
     
     init() {
-        let networkManager = NetworkManager(urlSession: URLSession.shared,
-                                            baseURL: URL(string: "https://api.github.com")!,
-                                            apiKey: APIKeyManager.shared.getGithubAPIKey())
-        let githubManager = GithubManager(networkManager: networkManager)
-        _userViewModel = StateObject(wrappedValue: UserViewModel(githubManager: githubManager))
+        let githubNetworkManager = NetworkManager(urlSession: URLSession.shared,
+                                                  baseURL: URL(string: "https://api.github.com")!,
+                                                  apiKey: APIKeyManager.shared.getGithubAPIKey())
+        let githubManager = GithubManager(networkManager: githubNetworkManager)
+        
+        let githubDataModelContainer = NSPersistentContainer(name: Storages.github.rawValue)
+        let githubCoreDataManager = CoreDataManager(container: githubDataModelContainer)
+        let githubDataModelManager = GithubDataModelManager(coreDataManager: githubCoreDataManager)
+        
+        _userViewModel = StateObject(wrappedValue: UserViewModel(githubManager: githubManager,
+                                                                 githubDataModelManager: githubDataModelManager))
     }
     
     var body: some Scene {

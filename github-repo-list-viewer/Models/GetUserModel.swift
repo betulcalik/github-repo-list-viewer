@@ -12,37 +12,34 @@ struct GetUserRequestModel: Codable {
 }
 
 struct GetUserResponseModel: Codable {
-    let avatarURL: String?
+    let username: String
     let name: String?
     let company: String?
     let location: String?
     let bio: String?
-    let reposURL: String?
-    let publicRepos: Int?
-    let followers: Int?
-    let following: Int?
+    let publicRepoCount: Int?
+    let followerCount: Int?
+    let followingCount: Int?
     
-    init(avatarURL: String? = nil, name: String? = nil, company: String? = nil, location: String? = nil, bio: String? = nil, reposURL: String? = nil, publicRepos: Int? = nil, followers: Int? = nil, following: Int? = nil) {
-        self.avatarURL = avatarURL
+    init(username: String, name: String? = nil, company: String? = nil, location: String? = nil, bio: String? = nil, publicRepoCount: Int?, followerCount: Int?, followingCount: Int?) {
+        self.username = username
         self.name = name
         self.company = company
         self.location = location
         self.bio = bio
-        self.reposURL = reposURL
-        self.publicRepos = publicRepos
-        self.followers = followers
-        self.following = following
+        self.publicRepoCount = publicRepoCount
+        self.followerCount = followerCount
+        self.followingCount = followingCount
     }
     
     enum CodingKeys: String, CodingKey {
-        case avatarURL = "avatar_url"
+        case username = "login"
         case name
         case company
         case location
         case bio
-        case reposURL = "repos_url"
-        case publicRepos = "public_repos"
-        case followers
-        case following
+        case publicRepoCount = "public_repos"
+        case followerCount = "followers"
+        case followingCount = "following"
     }
 }
