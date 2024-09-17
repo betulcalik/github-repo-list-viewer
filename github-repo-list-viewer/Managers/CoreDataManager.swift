@@ -37,6 +37,8 @@ final class CoreDataManager: CoreDataManagerProtocol {
             
             debugPrint("Successfully loaded core data.")
         }
+        
+        container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
     // MARK: Public Methods
@@ -48,6 +50,7 @@ final class CoreDataManager: CoreDataManagerProtocol {
                 let request = T.fetchRequest()
                 request.predicate = predicate
                 request.sortDescriptors = sortDescriptors
+                request.returnsObjectsAsFaults = false
                 
                 do {
                     let results = try mainContext.fetch(request) as? [T] ?? []
@@ -61,7 +64,7 @@ final class CoreDataManager: CoreDataManagerProtocol {
     }
     
     func add<T: NSManagedObject>(entity: T.Type, configure: @escaping (T) -> Void) -> AnyPublisher<Bool, Error> {
-        let backgroundContext = container.newBackgroundContext()
+        let backgroundContext = createBackgroundContext()
         
         return Future<Bool, Error> { promise in
             backgroundContext.perform {
@@ -84,7 +87,7 @@ final class CoreDataManager: CoreDataManagerProtocol {
     }
     
     func update<T: NSManagedObject>(object: T, configure: @escaping (T) -> Void) -> AnyPublisher<Bool, Error> {
-        let backgroundContext = container.newBackgroundContext()
+        let backgroundContext = createBackgroundContext()
         
         return Future<Bool, Error> { promise in
             backgroundContext.perform {
@@ -108,7 +111,7 @@ final class CoreDataManager: CoreDataManagerProtocol {
     }
     
     func delete<T: NSManagedObject>(object: T) -> AnyPublisher<Bool, Error> {
-        let backgroundContext = container.newBackgroundContext()
+        let backgroundContext = createBackgroundContext()
         
         return Future<Bool, Error> { promise in
             backgroundContext.perform {
@@ -129,5 +132,12 @@ final class CoreDataManager: CoreDataManagerProtocol {
             }
         }
         .eraseToAnyPublisher()
+    }
+    
+    // MARK: Private Methods
+    private func createBackgroundContext() -> NSManagedObjectContext {
+        let backgroundContext = container.newBackgroundContext()
+        backgroundContext.automaticallyMergesChangesFromParent = true
+        return backgroundContext
     }
 }
