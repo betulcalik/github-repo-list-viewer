@@ -9,9 +9,11 @@ import Foundation
 import Combine
 
 protocol NetworkManagerProtocol {
-    func fetch<T: Decodable>(from path: String?) -> AnyPublisher<T, NetworkError>
-    func post<T: Decodable, U: Encodable>(to path: String?, body: U) -> AnyPublisher<T, NetworkError>
+    func fetch<T: Decodable>(from path: String?, queryParameters: QueryParameters?) -> AnyPublisher<T, NetworkError>
+    func post<T: Decodable, U: Encodable>(to path: String?, body: U, queryParameters: QueryParameters?) -> AnyPublisher<T, NetworkError>
 }
+
+typealias QueryParameters = [String: String]
 
 final class NetworkManager: NetworkManagerProtocol {
     
@@ -28,26 +30,43 @@ final class NetworkManager: NetworkManagerProtocol {
     }
     
     // MARK: Public Methods
-    func fetch<T: Decodable>(from path: String?) -> AnyPublisher<T, NetworkError> {
-        let fullURL: URL
+    func fetch<T: Decodable>(from path: String?, queryParameters: QueryParameters? = nil) -> AnyPublisher<T, NetworkError> {
+        // Construct the base URL with path
+        let baseURLWithPath: URL
         
         if let path = path, !path.isEmpty {
-            fullURL = baseURL.appendingPathComponent(path)
+            baseURLWithPath = baseURL.appendingPathComponent(path)
         } else {
-            fullURL = baseURL
+            baseURLWithPath = baseURL
         }
         
-        guard let url = URL(string: fullURL.absoluteString) else {
-            return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
+        // Append query parameters to the URL if any
+        let fullURL: URL
+        
+        if let queryParameters = queryParameters {
+            var urlComponents = URLComponents(url: baseURLWithPath, resolvingAgainstBaseURL: false)!
+            
+            var queryItems = [URLQueryItem]()
+            queryParameters.forEach { key, value in
+                queryItems.append(URLQueryItem(name: key, value: value))
+            }
+            
+            urlComponents.queryItems = queryItems
+            guard let url = urlComponents.url else {
+                return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
+            }
+            fullURL = url
+        } else {
+            fullURL = baseURLWithPath
         }
         
-        var request = URLRequest(url: url)
-        
+        // Create the URLRequest
+        var request = URLRequest(url: fullURL)
         if let apiKey = apiKey, !apiKey.isEmpty {
-            request.setValue("Bearer \(apiKey)",
-                             forHTTPHeaderField: HTTPHeader.authorization.rawValue)
+            request.setValue("Bearer \(apiKey)", forHTTPHeaderField: HTTPHeader.authorization.rawValue)
         }
 
+        // Perform the network request
         return urlSession.dataTaskPublisher(for: request)
             .tryMap { result in
                 guard let httpResponse = result.response as? HTTPURLResponse else {
@@ -76,26 +95,41 @@ final class NetworkManager: NetworkManagerProtocol {
             .eraseToAnyPublisher()
     }
     
-    func post<T: Decodable, U: Encodable>(to path: String?, body: U) -> AnyPublisher<T, NetworkError> {
-        let fullURL: URL
-        
+    func post<T: Decodable, U: Encodable>(to path: String?, body: U, queryParameters: QueryParameters? = nil) -> AnyPublisher<T, NetworkError> {
+        // Construct the base URL with path
+        let baseURLWithPath: URL
         if let path = path, !path.isEmpty {
-            fullURL = baseURL.appendingPathComponent(path)
+            baseURLWithPath = baseURL.appendingPathComponent(path)
         } else {
-            fullURL = baseURL
+            baseURLWithPath = baseURL
         }
         
-        guard let url = URL(string: fullURL.absoluteString) else {
-            return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
+        // Append query parameters to the URL if any
+        let fullURL: URL
+        if let queryParameters = queryParameters {
+            var urlComponents = URLComponents(url: baseURLWithPath, resolvingAgainstBaseURL: false)!
+            
+            var queryItems = [URLQueryItem]()
+            queryParameters.forEach { key, value in
+                queryItems.append(URLQueryItem(name: key, value: value))
+            }
+            
+            urlComponents.queryItems = queryItems
+            guard let url = urlComponents.url else {
+                return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
+            }
+            fullURL = url
+        } else {
+            fullURL = baseURLWithPath
         }
-
-        var request = URLRequest(url: url)
+        
+        // Create the URLRequest
+        var request = URLRequest(url: fullURL)
         request.httpMethod = HTTPMethod.post.rawValue
-        request.setValue(MIMEType.JSON.rawValue,
-                         forHTTPHeaderField: HTTPHeader.contentType.rawValue)
+        request.setValue(MIMEType.JSON.rawValue, forHTTPHeaderField: HTTPHeader.contentType.rawValue)
         
         if let apiKey = apiKey, !apiKey.isEmpty {
-            request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+            request.setValue("Bearer \(apiKey)", forHTTPHeaderField: HTTPHeader.authorization.rawValue)
         }
         
         do {
@@ -104,6 +138,7 @@ final class NetworkManager: NetworkManagerProtocol {
             return Fail(error: NetworkError.decodingError).eraseToAnyPublisher()
         }
         
+        // Perform the network request
         return urlSession.dataTaskPublisher(for: request)
             .tryMap { result in
                 guard let httpResponse = result.response as? HTTPURLResponse else {
@@ -126,7 +161,6 @@ final class NetworkManager: NetworkManagerProtocol {
                 if error is DecodingError {
                     return NetworkError.decodingError
                 }
-                
                 return NetworkError.unknown
             }
             .eraseToAnyPublisher()

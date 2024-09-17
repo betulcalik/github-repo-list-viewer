@@ -30,10 +30,12 @@ final class GithubManager: GithubManagerProtocol, ObservableObject {
     
     // MARK: Public Methods
     func getUser(model: GetUserRequestModel) -> AnyPublisher<GetUserResponseModel, NetworkError> {
-        networkManager.fetch(from: "/" + Path.users.rawValue + "/" + model.username)
+        networkManager.fetch(from: "/" + Path.users.rawValue + "/" + model.username, queryParameters: nil)
     }
     
     func getUserRepositories(model: GetUserRepositoryRequestModel) -> AnyPublisher<[GetUserRepositoryResponseModel], NetworkError> {
-        networkManager.fetch(from: "/" + Path.users.rawValue + "/" + model.username + "/" + Path.repos.rawValue)
+        networkManager.fetch(from: "/" + Path.users.rawValue + "/" + model.username + "/" + Path.repos.rawValue, 
+                             queryParameters: ["per_page": "\(model.maxReposPerPage)",
+                                               "page": "\(model.page)"])
     }
 }
