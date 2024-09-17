@@ -19,6 +19,9 @@ final class UserDetailViewModel: ObservableObject {
     @Published var repositories: [Repository] = []
     @Published var isLoading: Bool = false
     
+    private var currentPage: Int = 1
+    private var maxReposPerPage: Int = 30
+    
     // MARK: Init
     init(user: User, githubManager: GithubManagerProtocol, githubDataModelManager: GithubDataModelManagerProtocol) {
         self.user = user
@@ -28,28 +31,40 @@ final class UserDetailViewModel: ObservableObject {
     
     // MARK: Public Methods
     func fetchUserRepositories() {
-        guard let username = user.username else { return }
-        let model = GetUserRepositoryRequestModel(username: username)
+        guard !isLoading else { return }
         isLoading = true
+        
+        guard let username = user.username else {
+            isLoading = false
+            return
+        }
+        
+        let model = GetUserRepositoryRequestModel(username: username, maxReposPerPage: maxReposPerPage, page: currentPage)
         
         githubManager.getUserRepositories(model: model)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 guard let self = self else { return }
-                isLoading = false
+                self.isLoading = false
                 
                 switch completion {
                 case .finished:
                     break
                 case .failure(let error):
                     debugPrint("Error: \(error)")
+                    self.fetchRepositoriesFromCoreData()
                 }
             }, receiveValue: { [weak self] response in
                 guard let self = self else { return }
-                debugPrint("Response: \(response)")
                 githubDataModelManager.saveRepositories(user: user, models: response)
+                fetchRepositoriesFromCoreData()
+                currentPage += 1
             })
             .store(in: &cancellables)
+    }
+    
+    func fetchMoreRepositories() {
+        fetchUserRepositories()
     }
     
     func fetchRepositoriesFromCoreData() {

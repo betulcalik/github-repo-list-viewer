@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchHistoryView: View {
     
+    @EnvironmentObject var networkMonitor: NetworkMonitor
     @EnvironmentObject var viewModel: SearchHistoryViewModel
     @EnvironmentObject var githubManager: GithubManager
     @EnvironmentObject var githubDataModelManager: GithubDataModelManager

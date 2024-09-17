@@ -17,13 +17,17 @@ struct UserDetailView: View {
                 ForEach(viewModel.repositories) { repository in
                     Text(repository.name ?? "Unknown")
                 }
+                
+                if viewModel.isLoading {
+                    ProgressView()
+                        .padding()
+                }
             }
             .listStyle(PlainListStyle())
-        }
-        .background(Colors.backgroundColor)
-        .onAppear {
-            viewModel.fetchUserRepositories()
-            viewModel.fetchRepositoriesFromCoreData()
+            .background(Colors.backgroundColor)
+            .onAppear {
+                viewModel.fetchUserRepositories()
+            }
         }
     }
 }

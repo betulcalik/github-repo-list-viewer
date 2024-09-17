@@ -11,6 +11,8 @@ import CoreData
 @main
 struct github_repo_list_viewerApp: App {
     
+    @StateObject private var networkMonitor = NetworkMonitor()
+    
     @StateObject private var searchUserViewModel: SearchUserViewModel
     @StateObject private var searchHistoryViewModel: SearchHistoryViewModel
     
@@ -38,6 +40,7 @@ struct github_repo_list_viewerApp: App {
     var body: some Scene {
         WindowGroup {
             BaseView()
+                .environmentObject(networkMonitor)
                 .environmentObject(searchUserViewModel)
                 .environmentObject(searchHistoryViewModel)
                 .environmentObject(githubManager)

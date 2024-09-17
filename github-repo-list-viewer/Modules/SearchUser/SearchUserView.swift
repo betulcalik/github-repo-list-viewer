@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchUserView: View {
     
     @EnvironmentObject var viewModel: SearchUserViewModel
-    @StateObject private var networkMonitor = NetworkMonitor()
+    @EnvironmentObject var networkMonitor: NetworkMonitor
     @State private var username: String = ""
     
     var body: some View {
