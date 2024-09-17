@@ -36,7 +36,7 @@ struct SearchUserView: View {
                 if viewModel.isLoading {
                     LoadingView()
                 }
-        }
+            }
         }
     }
 }

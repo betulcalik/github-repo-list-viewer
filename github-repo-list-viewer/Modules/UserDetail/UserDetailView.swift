@@ -13,9 +13,14 @@ struct UserDetailView: View {
     
     var body: some View {
         VStack {
-            
+            List {
+                ForEach(viewModel.repositories) { repository in
+                    Text(repository.name ?? "Unknown")
+                }
+            }
         }.onAppear {
             viewModel.fetchUserRepositories()
+            viewModel.fetchRepositoriesFromCoreData()
         }
     }
 }

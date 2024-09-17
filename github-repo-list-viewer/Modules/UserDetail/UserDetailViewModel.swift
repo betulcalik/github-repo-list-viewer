@@ -16,6 +16,7 @@ final class UserDetailViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     @Published var user: User
+    @Published var repositories: [Repository] = []
     @Published var isLoading: Bool = false
     
     // MARK: Init
@@ -46,6 +47,24 @@ final class UserDetailViewModel: ObservableObject {
             }, receiveValue: { [weak self] response in
                 guard let self = self else { return }
                 debugPrint("Response: \(response)")
+                githubDataModelManager.saveRepositories(user: user, models: response)
+            })
+            .store(in: &cancellables)
+    }
+    
+    func fetchRepositoriesFromCoreData() {
+        githubDataModelManager.fetchUserRepositories(user: user)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    debugPrint("Error fetching from Core Data: \(error)")
+                }
+            }, receiveValue: { [weak self] repositories in
+                guard let self = self else { return }
+                self.repositories = repositories
             })
             .store(in: &cancellables)
     }

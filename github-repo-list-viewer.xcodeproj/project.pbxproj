@@ -10,6 +10,7 @@
 		621CDD192C96FFCB0052194A /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621CDD182C96FFCB0052194A /* HTTPMethod.swift */; };
 		621CDD1B2C97009A0052194A /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621CDD1A2C97009A0052194A /* HTTPHeader.swift */; };
 		621CDD1D2C9701550052194A /* MIMEType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621CDD1C2C9701550052194A /* MIMEType.swift */; };
+		62283DB42C9A0A86002E11E0 /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62283DB32C9A0A86002E11E0 /* DateFormatter+Extensions.swift */; };
 		62C2829F2C98ADE400C727D7 /* SearchHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2829E2C98ADE400C727D7 /* SearchHistoryViewModel.swift */; };
 		62C282A52C98DAB800C727D7 /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C282A42C98DAB800C727D7 /* UserDetailView.swift */; };
 		62C282A72C98DB9D00C727D7 /* UserDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C282A62C98DB9D00C727D7 /* UserDetailViewModel.swift */; };
@@ -54,6 +55,7 @@
 		621CDD182C96FFCB0052194A /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		621CDD1A2C97009A0052194A /* HTTPHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
 		621CDD1C2C9701550052194A /* MIMEType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIMEType.swift; sourceTree = "<group>"; };
+		62283DB32C9A0A86002E11E0 /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		62C2829E2C98ADE400C727D7 /* SearchHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewModel.swift; sourceTree = "<group>"; };
 		62C282A42C98DAB800C727D7 /* UserDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailView.swift; sourceTree = "<group>"; };
 		62C282A62C98DB9D00C727D7 /* UserDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewModel.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				62DBCCBE2C94E954007B8B09 /* String+Extensions.swift */,
+				62283DB32C9A0A86002E11E0 /* DateFormatter+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				62C282A92C98DCBA00C727D7 /* GetUserRepositoryModel.swift in Sources */,
 				62DC94D32C9836500034E8AC /* GithubDataModel.xcdatamodeld in Sources */,
 				621CDD1B2C97009A0052194A /* HTTPHeader.swift in Sources */,
+				62283DB42C9A0A86002E11E0 /* DateFormatter+Extensions.swift in Sources */,
 				62DC94CE2C979F9A0034E8AC /* Colors.swift in Sources */,
 				62DC94C22C978ECA0034E8AC /* APIKeyManager.swift in Sources */,
 				62DC94D72C9839CC0034E8AC /* GithubDataModelManager.swift in Sources */,

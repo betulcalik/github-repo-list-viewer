@@ -10,9 +10,12 @@ import Combine
 
 protocol GithubDataModelManagerProtocol {
     func saveUser(model: GetUserResponseModel)
-    func saveRepository(model: GetUserRepositoryResponseModel)
+    func saveRepository(user: User, model: GetUserRepositoryResponseModel)
+    func saveRepositories(user: User, models: [GetUserRepositoryResponseModel])
     
     func fetchAllUsers() -> AnyPublisher<[User], Error>
+    func fetchAllRepositories() -> AnyPublisher<[Repository], Error>
+    func fetchUserRepositories(user: User) -> AnyPublisher<[Repository], Error>
 }
 
 final class GithubDataModelManager: GithubDataModelManagerProtocol, ObservableObject {
@@ -55,7 +58,18 @@ final class GithubDataModelManager: GithubDataModelManagerProtocol, ObservableOb
             .store(in: &cancellables)
     }
     
-    func saveRepository(model: GetUserRepositoryResponseModel) {
+    func fetchAllUsers() -> AnyPublisher<[User], Error> {
+        return coreDataManager.fetch(entity: User.self, predicate: nil, sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: true)])
+            .eraseToAnyPublisher()
+    }
+    
+    func saveRepositories(user: User, models: [GetUserRepositoryResponseModel]) {
+        for model in models {
+            saveRepository(user: user, model: model)
+        }
+    }
+    
+    func saveRepository(user: User, model: GetUserRepositoryResponseModel) {
         let predicate = NSPredicate(format: "id == %d", model.id)
         
         coreDataManager.fetch(entity: Repository.self, predicate: predicate, sortDescriptors: nil)
@@ -63,10 +77,10 @@ final class GithubDataModelManager: GithubDataModelManagerProtocol, ObservableOb
                 guard let self = self else { return Empty().eraseToAnyPublisher() }
                 
                 if existingRepositories.isEmpty {
-                    return saveNewRepository(model: model)
+                    return saveNewRepository(user: user, model: model)
                 }
                 
-                debugPrint("User with repository \(model.name) already exists.")
+                debugPrint("User with repository \(model.id) already exists.")
                 return Just(true)
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
@@ -82,8 +96,16 @@ final class GithubDataModelManager: GithubDataModelManagerProtocol, ObservableOb
             .store(in: &cancellables)
     }
     
-    func fetchAllUsers() -> AnyPublisher<[User], Error> {
-        return coreDataManager.fetch(entity: User.self, predicate: nil, sortDescriptors: nil)
+    func fetchAllRepositories() -> AnyPublisher<[Repository], Error> {
+        return coreDataManager.fetch(entity: Repository.self, predicate: nil, sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: false)])
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchUserRepositories(user: User) -> AnyPublisher<[Repository], Error> {
+        let predicate = NSPredicate(format: "user == %@", user)
+        
+        return coreDataManager.fetch(entity: Repository.self, predicate: predicate, sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: false)])
+            .eraseToAnyPublisher()
     }
     
     // MARK: Private Methods
@@ -97,21 +119,30 @@ final class GithubDataModelManager: GithubDataModelManagerProtocol, ObservableOb
             newUser.publicRepoCount = Int32(model.publicRepoCount ?? 0)
             newUser.followerCount = Int32(model.followerCount ?? 0)
             newUser.followingCount = Int32(model.followingCount ?? 0)
+            newUser.createdAt = Date()
         }
     }
     
-    private func saveNewRepository(model: GetUserRepositoryResponseModel) -> AnyPublisher<Bool, Error> {
+    private func saveNewRepository(user: User, model: GetUserRepositoryResponseModel) -> AnyPublisher<Bool, Error> {
         coreDataManager.add(entity: Repository.self) { newRepository in
             newRepository.id = Int64(model.id)
             newRepository.name = model.name
             newRepository.isPrivate = model.isPrivate ?? false
             newRepository.desc = model.description
-           // newRepository.createdAt
-           // newRepository.updatedAt
             newRepository.starCount = Int16(model.starCount ?? 0)
             newRepository.language = model.language
             newRepository.topics = model.topics
             newRepository.watchers = Int16(model.watchers ?? 0)
+            
+            if let createdAt = model.createdAt {
+                newRepository.createdAt = DateFormatter.iso8601.date(from: createdAt)
+            }
+            
+            if let updatedAt = model.updatedAt {
+                newRepository.updatedAt = DateFormatter.iso8601.date(from: updatedAt)
+            }
+            
+            newRepository.user = user
         }
     }
 }

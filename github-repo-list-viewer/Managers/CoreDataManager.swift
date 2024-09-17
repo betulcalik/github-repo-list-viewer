@@ -64,19 +64,19 @@ final class CoreDataManager: CoreDataManagerProtocol {
     }
     
     func add<T: NSManagedObject>(entity: T.Type, configure: @escaping (T) -> Void) -> AnyPublisher<Bool, Error> {
-        let backgroundContext = createBackgroundContext()
+        let context = container.viewContext
         
         return Future<Bool, Error> { promise in
-            backgroundContext.perform {
+            context.perform {
                 let entityName = String(describing: entity)
-                guard let newObject = NSEntityDescription.insertNewObject(forEntityName: entityName, into: backgroundContext) as? T else {
+                guard let newObject = NSEntityDescription.insertNewObject(forEntityName: entityName, into: context) as? T else {
                     promise(.success(false))
                     return
                 }
                 configure(newObject)
                 
                 do {
-                    try backgroundContext.save()
+                    try context.save()
                     promise(.success(true))
                 } catch {
                     promise(.failure(error))
@@ -87,11 +87,11 @@ final class CoreDataManager: CoreDataManagerProtocol {
     }
     
     func update<T: NSManagedObject>(object: T, configure: @escaping (T) -> Void) -> AnyPublisher<Bool, Error> {
-        let backgroundContext = createBackgroundContext()
+        let context = container.viewContext
         
         return Future<Bool, Error> { promise in
-            backgroundContext.perform {
-                let objectInContext = backgroundContext.object(with: object.objectID) as? T
+            context.perform {
+                let objectInContext = context.object(with: object.objectID) as? T
                 guard let managedObject = objectInContext else {
                     promise(.success(false))
                     return
@@ -100,7 +100,7 @@ final class CoreDataManager: CoreDataManagerProtocol {
                 configure(managedObject)
                 
                 do {
-                    try backgroundContext.save()
+                    try context.save()
                     promise(.success(true))
                 } catch {
                     promise(.failure(error))
@@ -111,20 +111,20 @@ final class CoreDataManager: CoreDataManagerProtocol {
     }
     
     func delete<T: NSManagedObject>(object: T) -> AnyPublisher<Bool, Error> {
-        let backgroundContext = createBackgroundContext()
+        let context = container.viewContext
         
         return Future<Bool, Error> { promise in
-            backgroundContext.perform {
-                let objectInContext = backgroundContext.object(with: object.objectID) as? T
+            context.perform {
+                let objectInContext = context.object(with: object.objectID) as? T
                 guard let managedObject = objectInContext else {
                     promise(.success(false))
                     return
                 }
                 
-                backgroundContext.delete(managedObject)
+                context.delete(managedObject)
                 
                 do {
-                    try backgroundContext.save()
+                    try context.save()
                     promise(.success(true))
                 } catch {
                     promise(.failure(error))
