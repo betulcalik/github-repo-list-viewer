@@ -27,6 +27,9 @@ final class UserDetailViewModel: ObservableObject {
         self.user = user
         self.githubManager = githubManager
         self.githubDataModelManager = githubDataModelManager
+        
+        fetchUserRepositories()
+        fetchUserRepositoriesFromCoreData()
     }
     
     // MARK: Public Methods
@@ -52,12 +55,10 @@ final class UserDetailViewModel: ObservableObject {
                     break
                 case .failure(let error):
                     debugPrint("Error: \(error)")
-                    self.fetchRepositoriesFromCoreData()
                 }
             }, receiveValue: { [weak self] response in
                 guard let self = self else { return }
                 githubDataModelManager.saveRepositories(user: user, models: response)
-                fetchRepositoriesFromCoreData()
                 currentPage += 1
             })
             .store(in: &cancellables)
@@ -65,9 +66,10 @@ final class UserDetailViewModel: ObservableObject {
     
     func fetchMoreRepositories() {
         fetchUserRepositories()
+        fetchUserRepositoriesFromCoreData()
     }
     
-    func fetchRepositoriesFromCoreData() {
+    func fetchUserRepositoriesFromCoreData() {
         githubDataModelManager.fetchUserRepositories(user: user)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in

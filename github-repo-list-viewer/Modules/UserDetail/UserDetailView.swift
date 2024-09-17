@@ -25,9 +25,6 @@ struct UserDetailView: View {
             }
             .listStyle(PlainListStyle())
             .background(Colors.backgroundColor)
-            .onAppear {
-                viewModel.fetchUserRepositories()
-            }
         }
     }
 }
