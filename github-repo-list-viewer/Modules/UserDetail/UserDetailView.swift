@@ -18,7 +18,10 @@ struct UserDetailView: View {
                     Text(repository.name ?? "Unknown")
                 }
             }
-        }.onAppear {
+            .listStyle(PlainListStyle())
+        }
+        .background(Colors.backgroundColor)
+        .onAppear {
             viewModel.fetchUserRepositories()
             viewModel.fetchRepositoriesFromCoreData()
         }

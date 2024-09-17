@@ -10,11 +10,17 @@ import SwiftUI
 struct SearchUserView: View {
     
     @EnvironmentObject var viewModel: SearchUserViewModel
+    @StateObject private var networkMonitor = NetworkMonitor()
     @State private var username: String = ""
     
     var body: some View {
         NavigationStack {
             VStack {
+                if !networkMonitor.isConnected {
+                    BannerView(text: "no_internet_connection".localized())
+                        .transition(.slide)
+                }
+                
                 header
                 
                 VStack(spacing: 20) {
@@ -25,6 +31,7 @@ struct SearchUserView: View {
                 Spacer()
             }
             .background(Colors.backgroundColor)
+            .animation(.easeInOut, value: networkMonitor.isConnected)
             .alert(isPresented: $viewModel.showAlert) {
                 Alert(
                     title: Text("error".localized()),
@@ -36,6 +43,9 @@ struct SearchUserView: View {
                 if viewModel.isLoading {
                     LoadingView()
                 }
+            }
+            .onTapGesture {
+                UIApplication.shared.endEditing(true)
             }
         }
     }

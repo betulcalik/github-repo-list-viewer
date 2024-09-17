@@ -22,6 +22,7 @@ struct SearchHistoryView: View {
                     usersList
                 }
             }
+            .background(Colors.backgroundColor)
             .navigationTitle("search_history".localized())
             .onAppear {
                 viewModel.fetchUsers()
@@ -58,7 +59,7 @@ extension SearchHistoryView {
                     .frame(height: 36)
                 }
             }
-        }
+        }.listStyle(PlainListStyle())
     }
 }
 

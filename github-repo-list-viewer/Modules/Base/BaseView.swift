@@ -13,14 +13,12 @@ struct BaseView: View {
     var body: some View {
         TabView {
             SearchUserView()
-                .background(Colors.backgroundColor)
                 .tabItem {
                     Label("search".localized(),
                           systemImage: "magnifyingglass")
                 }
             
             SearchHistoryView()
-                .background(Colors.backgroundColor)
                 .tabItem {
                     Label("history".localized(),
                           systemImage: "clock")
@@ -34,4 +32,6 @@ struct BaseView: View {
         .environmentObject(PreviewProvider.shared.searchUserViewModel)
         .environmentObject(PreviewProvider.shared.searchHistoryViewModel)
         .environmentObject(PreviewProvider.shared.userDetailViewModel)
+        .environmentObject(PreviewProvider.shared.githubManager)
+        .environmentObject(PreviewProvider.shared.githubDataModelManager)
 }
