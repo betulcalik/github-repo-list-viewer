@@ -12,33 +12,32 @@ final class PreviewProvider {
     
     static let shared = PreviewProvider()
     
-    let searchUserViewModel = SearchUserViewModel(
-        githubManager:
-            GithubManager(
-                networkManager:
-                    NetworkManager(urlSession: URLSession.shared,
-                                   baseURL: URL(string: "https://api.github.com")!,
-                                   apiKey: APIKeyManager.shared.getGithubAPIKey())),
-        githubDataModelManager:
-            GithubDataModelManager(
-                coreDataManager:
-                    CoreDataManager(
-                        container:
-                            NSPersistentContainer(name: "GithubDataModel")
-                    )
-            )
-    )
+    // Expose githubManager for preview
+    let searchUserViewModel: SearchUserViewModel
+    let userHistoryViewModel: SearchHistoryViewModel
+    let githubManager: GithubManager
     
-    let userHistoryViewModel = SearchHistoryViewModel(
-        githubDataModelManager:
-            GithubDataModelManager(
-                coreDataManager:
-                    CoreDataManager(
-                        container:
-                            NSPersistentContainer(name: "GithubDataModel")
-                    )
-            )
-    )
-    
-    private init() { }
+    private init() {
+        let networkManager = NetworkManager(
+            urlSession: URLSession.shared,
+            baseURL: URL(string: "https://api.github.com")!,
+            apiKey: APIKeyManager.shared.getGithubAPIKey()
+        )
+        
+        githubManager = GithubManager(networkManager: networkManager)
+        
+        let persistentContainer = NSPersistentContainer(name: "GithubDataModel")
+        let coreDataManager = CoreDataManager(container: persistentContainer)
+        let githubDataModelManager = GithubDataModelManager(coreDataManager: coreDataManager)
+        
+        searchUserViewModel = SearchUserViewModel(
+            githubManager: githubManager,
+            githubDataModelManager: githubDataModelManager
+        )
+        
+        userHistoryViewModel = SearchHistoryViewModel(
+            githubDataModelManager: githubDataModelManager
+        )
+    }
 }
+

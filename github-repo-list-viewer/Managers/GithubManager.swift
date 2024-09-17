@@ -13,7 +13,7 @@ protocol GithubManagerProtocol {
     func getUserRepositories(model: GetUserRepositoryRequestModel) -> AnyPublisher<[GetUserRepositoryResponseModel], NetworkError>
 }
 
-final class GithubManager: GithubManagerProtocol {
+final class GithubManager: GithubManagerProtocol, ObservableObject {
     
     // MARK: Properties
     private let networkManager: NetworkManagerProtocol

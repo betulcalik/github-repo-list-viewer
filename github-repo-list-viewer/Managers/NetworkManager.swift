@@ -43,8 +43,8 @@ final class NetworkManager: NetworkManagerProtocol {
         
         var request = URLRequest(url: url)
         
-        if let apiKey = apiKey {
-            request.setValue("Bearer \(apiKey)", 
+        if let apiKey = apiKey, !apiKey.isEmpty {
+            request.setValue("Bearer \(apiKey)",
                              forHTTPHeaderField: HTTPHeader.authorization.rawValue)
         }
 
@@ -89,7 +89,7 @@ final class NetworkManager: NetworkManagerProtocol {
         request.setValue(MIMEType.JSON.rawValue,
                          forHTTPHeaderField: HTTPHeader.contentType.rawValue)
         
-        if let apiKey = apiKey {
+        if let apiKey = apiKey, !apiKey.isEmpty {
             request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         }
         

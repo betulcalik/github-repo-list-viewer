@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchHistoryView: View {
     
     @EnvironmentObject var viewModel: SearchHistoryViewModel
+    @EnvironmentObject var githubManager: GithubManager
     
     var body: some View {
         NavigationStack {
@@ -23,7 +24,10 @@ struct SearchHistoryView: View {
                 } else {
                     List {
                         ForEach(viewModel.users) { user in
-                            NavigationLink(destination: UserDetailView().environmentObject(UserDetailViewModel(user: user, githubManager: GithubManager(networkManager: NetworkManager(urlSession: URLSession.shared, baseURL: URL(string: "https://api.github.com")!, apiKey: APIKeyManager.shared.getGithubAPIKey()))))) {
+                            NavigationLink(
+                                destination: UserDetailView()
+                                    .environmentObject(UserDetailViewModel(user: user, githubManager: githubManager))
+                            ) {
                                 HStack {
                                     Image(systemName: "person")
                                         .foregroundStyle(Colors.textColor.opacity(0.2))
@@ -48,4 +52,5 @@ struct SearchHistoryView: View {
 #Preview {
     SearchHistoryView()
         .environmentObject(PreviewProvider.shared.userHistoryViewModel)
+        .environmentObject(PreviewProvider.shared.githubManager)
 }
