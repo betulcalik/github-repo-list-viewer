@@ -64,6 +64,7 @@ extension SearchHistoryView {
 
 #Preview {
     SearchHistoryView()
-        .environmentObject(PreviewProvider.shared.userHistoryViewModel)
+        .environmentObject(PreviewProvider.shared.searchHistoryViewModel)
         .environmentObject(PreviewProvider.shared.githubManager)
+        .environmentObject(PreviewProvider.shared.githubDataModelManager)
 }

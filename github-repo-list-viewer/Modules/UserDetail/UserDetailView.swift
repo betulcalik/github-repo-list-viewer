@@ -20,3 +20,7 @@ struct UserDetailView: View {
     }
 }
 
+#Preview {
+    UserDetailView()
+        .environmentObject(PreviewProvider.shared.userDetailViewModel)
+}

@@ -54,12 +54,16 @@ final class NetworkManager: NetworkManagerProtocol {
                     throw NetworkError.invalidResponse
                 }
                 
-                // todo update this
-                if !(200...299).contains(httpResponse.statusCode) {
+                switch httpResponse.statusCode {
+                case 200...299:
+                    return result.data
+                case 400...499:
+                    throw NetworkError.clientError(statusCode: httpResponse.statusCode)
+                case 500...599:
                     throw NetworkError.serverError(statusCode: httpResponse.statusCode)
+                default:
+                    throw NetworkError.unknown
                 }
-                
-                return result.data
             }
             .decode(type: T.self, decoder: JSONDecoder())
             .mapError { error in
@@ -106,11 +110,16 @@ final class NetworkManager: NetworkManagerProtocol {
                     throw NetworkError.invalidResponse
                 }
                 
-                if !(200...299).contains(httpResponse.statusCode) {
+                switch httpResponse.statusCode {
+                case 200...299:
+                    return result.data
+                case 400...499:
+                    throw NetworkError.clientError(statusCode: httpResponse.statusCode)
+                case 500...599:
                     throw NetworkError.serverError(statusCode: httpResponse.statusCode)
+                default:
+                    throw NetworkError.unknown
                 }
-                
-                return result.data
             }
             .decode(type: T.self, decoder: JSONDecoder())
             .mapError { error in

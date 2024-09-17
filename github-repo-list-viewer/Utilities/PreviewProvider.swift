@@ -12,10 +12,12 @@ final class PreviewProvider {
     
     static let shared = PreviewProvider()
     
-    // Expose githubManager for preview
     let searchUserViewModel: SearchUserViewModel
-    let userHistoryViewModel: SearchHistoryViewModel
+    let searchHistoryViewModel: SearchHistoryViewModel
+    let userDetailViewModel: UserDetailViewModel
+    
     let githubManager: GithubManager
+    let githubDataModelManager: GithubDataModelManager
     
     private init() {
         let networkManager = NetworkManager(
@@ -28,16 +30,36 @@ final class PreviewProvider {
         
         let persistentContainer = NSPersistentContainer(name: "GithubDataModel")
         let coreDataManager = CoreDataManager(container: persistentContainer)
-        let githubDataModelManager = GithubDataModelManager(coreDataManager: coreDataManager)
+        githubDataModelManager = GithubDataModelManager(coreDataManager: coreDataManager)
+        
+        let mockContext = persistentContainer.viewContext
+        let mockUser = User.mockUser(context: mockContext)
         
         searchUserViewModel = SearchUserViewModel(
             githubManager: githubManager,
             githubDataModelManager: githubDataModelManager
         )
         
-        userHistoryViewModel = SearchHistoryViewModel(
+        searchHistoryViewModel = SearchHistoryViewModel(
             githubDataModelManager: githubDataModelManager
         )
+        
+        userDetailViewModel = UserDetailViewModel(user: mockUser,
+                                                  githubManager: githubManager,
+                                                  githubDataModelManager: githubDataModelManager)
     }
 }
 
+
+extension User {
+    
+    static func mockUser(context: NSManagedObjectContext) -> User {
+        let user = User(context: context)
+        user.username = "MockUsername"
+        user.bio = "This is a mock bio for testing."
+        user.location = "Mock City"
+        user.company = "Mock Company"
+        return user
+    }
+    
+}

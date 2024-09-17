@@ -18,6 +18,11 @@ final class GithubManager: GithubManagerProtocol, ObservableObject {
     // MARK: Properties
     private let networkManager: NetworkManagerProtocol
     
+    enum Path: String {
+        case users = "users"
+        case repos = "repos"
+    }
+    
     // MARK: Init
     init(networkManager: NetworkManagerProtocol) {
         self.networkManager = networkManager
@@ -25,11 +30,10 @@ final class GithubManager: GithubManagerProtocol, ObservableObject {
     
     // MARK: Public Methods
     func getUser(model: GetUserRequestModel) -> AnyPublisher<GetUserResponseModel, NetworkError> {
-        // todo add enum
-        networkManager.fetch(from: "/users/" + model.username)
+        networkManager.fetch(from: "/" + Path.users.rawValue + "/" + model.username)
     }
     
     func getUserRepositories(model: GetUserRepositoryRequestModel) -> AnyPublisher<[GetUserRepositoryResponseModel], NetworkError> {
-        networkManager.fetch(from: "/users/" + model.username + "/repos")
+        networkManager.fetch(from: "/" + Path.users.rawValue + "/" + model.username + "/" + Path.repos.rawValue)
     }
 }

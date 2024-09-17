@@ -12,7 +12,7 @@ import CoreData
 struct github_repo_list_viewerApp: App {
     
     @StateObject private var searchUserViewModel: SearchUserViewModel
-    @StateObject private var userHistoryViewModel: SearchHistoryViewModel
+    @StateObject private var searchHistoryViewModel: SearchHistoryViewModel
     
     @StateObject private var githubManager: GithubManager
     @StateObject private var githubDataModelManager: GithubDataModelManager
@@ -32,14 +32,14 @@ struct github_repo_list_viewerApp: App {
         
         _searchUserViewModel = StateObject(wrappedValue: SearchUserViewModel(githubManager: githubManagerInstance,
                                                                        githubDataModelManager: githubDataModelManagerInstance))
-        _userHistoryViewModel = StateObject(wrappedValue: SearchHistoryViewModel(githubDataModelManager: githubDataModelManagerInstance))
+        _searchHistoryViewModel = StateObject(wrappedValue: SearchHistoryViewModel(githubDataModelManager: githubDataModelManagerInstance))
     }
     
     var body: some Scene {
         WindowGroup {
             BaseView()
                 .environmentObject(searchUserViewModel)
-                .environmentObject(userHistoryViewModel)
+                .environmentObject(searchHistoryViewModel)
                 .environmentObject(githubManager)
                 .environmentObject(githubDataModelManager)
         }

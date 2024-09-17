@@ -32,5 +32,6 @@ struct BaseView: View {
 #Preview {
     BaseView()
         .environmentObject(PreviewProvider.shared.searchUserViewModel)
-        .environmentObject(PreviewProvider.shared.userHistoryViewModel)
+        .environmentObject(PreviewProvider.shared.searchHistoryViewModel)
+        .environmentObject(PreviewProvider.shared.userDetailViewModel)
 }
