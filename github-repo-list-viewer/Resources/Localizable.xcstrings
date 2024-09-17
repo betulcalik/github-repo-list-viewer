@@ -29,8 +29,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Veri çözme başarısız. "
+            "state" : "translated",
+            "value" : "Veri çözme başarısız."
           }
         }
       }
@@ -42,6 +42,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "History"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geçmiş"
           }
         }
       }
@@ -139,6 +145,12 @@
             "state" : "translated",
             "value" : "Search History"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arama Geçmişi"
+          }
         }
       }
     },
@@ -170,8 +182,25 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Bilinmeyen bir hata oluştu."
+          }
+        }
+      }
+    },
+    "unknown_user" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown User"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bilinmeyen Kullanıcı"
           }
         }
       }
@@ -183,6 +212,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No user history available."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kullanıcı geçmişi bulunamadı."
           }
         }
       }

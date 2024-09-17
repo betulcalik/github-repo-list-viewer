@@ -106,6 +106,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		62283DAA2C99E7B2002E11E0 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				62283DAB2C99E7BE002E11E0 /* Base */,
+				62283DAC2C99E7C6002E11E0 /* SearchUser */,
+				62283DAD2C99E7D5002E11E0 /* SearchHistory */,
+				62283DAE2C99E7E9002E11E0 /* UserDetail */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		62283DAB2C99E7BE002E11E0 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				62DC94DE2C98A8E50034E8AC /* BaseView.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		62283DAC2C99E7C6002E11E0 /* SearchUser */ = {
+			isa = PBXGroup;
+			children = (
+				62DC94BD2C978B510034E8AC /* SearchUserView.swift */,
+				62DC94C52C97926D0034E8AC /* SearchUserViewModel.swift */,
+			);
+			path = SearchUser;
+			sourceTree = "<group>";
+		};
+		62283DAD2C99E7D5002E11E0 /* SearchHistory */ = {
+			isa = PBXGroup;
+			children = (
+				62DC94DC2C98A7F40034E8AC /* SearchHistoryView.swift */,
+				62C2829E2C98ADE400C727D7 /* SearchHistoryViewModel.swift */,
+			);
+			path = SearchHistory;
+			sourceTree = "<group>";
+		};
+		62283DAE2C99E7E9002E11E0 /* UserDetail */ = {
+			isa = PBXGroup;
+			children = (
+				62C282A42C98DAB800C727D7 /* UserDetailView.swift */,
+				62C282A62C98DB9D00C727D7 /* UserDetailViewModel.swift */,
+			);
+			path = UserDetail;
+			sourceTree = "<group>";
+		};
 		62DBCC732C94DE53007B8B09 = {
 			isa = PBXGroup;
 			children = (
@@ -133,8 +179,7 @@
 				62DC94CA2C979CD90034E8AC /* Components */,
 				62DC94B62C97865C0034E8AC /* Models */,
 				62DBCCB12C94E051007B8B09 /* Managers */,
-				62DC94C42C97925E0034E8AC /* ViewModels */,
-				62DC94C32C9792550034E8AC /* Views */,
+				62283DAA2C99E7B2002E11E0 /* Modules */,
 				62DBCCBA2C94E759007B8B09 /* Utilities */,
 				62DBCCBD2C94E944007B8B09 /* Extensions */,
 				62DBCCB52C94E0A2007B8B09 /* Resources */,
@@ -240,27 +285,6 @@
 				62C282A82C98DCBA00C727D7 /* GetUserRepositoryModel.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		62DC94C32C9792550034E8AC /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				62DC94DE2C98A8E50034E8AC /* BaseView.swift */,
-				62DC94BD2C978B510034E8AC /* SearchUserView.swift */,
-				62DC94DC2C98A7F40034E8AC /* SearchHistoryView.swift */,
-				62C282A42C98DAB800C727D7 /* UserDetailView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		62DC94C42C97925E0034E8AC /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				62DC94C52C97926D0034E8AC /* SearchUserViewModel.swift */,
-				62C2829E2C98ADE400C727D7 /* SearchHistoryViewModel.swift */,
-				62C282A62C98DB9D00C727D7 /* UserDetailViewModel.swift */,
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		62DC94C92C9796330034E8AC /* NetworkUtilities */ = {

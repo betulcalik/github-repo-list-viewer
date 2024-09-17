@@ -14,14 +14,8 @@ struct SearchUserView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 10) {
-                Image("githubIcon")
-                
-                Text("search_github_repositories".localized())
-                    .font(.title2)
-                    .foregroundStyle(Colors.textColor)
-                    .multilineTextAlignment(.center)
-                    .padding([.horizontal, .bottom])
+            VStack {
+                header
                 
                 VStack(spacing: 20) {
                     usernameTextField
@@ -48,6 +42,18 @@ struct SearchUserView: View {
 }
 
 extension SearchUserView {
+    
+    private var header: some View {
+        VStack {
+            Image("githubIcon")
+            
+            Text("search_github_repositories".localized())
+                .font(.title2)
+                .foregroundStyle(Colors.textColor)
+                .multilineTextAlignment(.center)
+                .padding([.horizontal, .bottom])
+        }
+    }
     
     private var usernameTextField: some View {
         HStack {
