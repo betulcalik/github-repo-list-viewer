@@ -13,7 +13,9 @@ struct github_repo_list_viewerApp: App {
     
     @StateObject private var searchUserViewModel: SearchUserViewModel
     @StateObject private var userHistoryViewModel: SearchHistoryViewModel
+    
     @StateObject private var githubManager: GithubManager
+    @StateObject private var githubDataModelManager: GithubDataModelManager
     
     init() {
         let githubNetworkManager = NetworkManager(urlSession: URLSession.shared,
@@ -23,12 +25,14 @@ struct github_repo_list_viewerApp: App {
         
         let githubDataModelContainer = NSPersistentContainer(name: Storages.github.rawValue)
         let githubCoreDataManager = CoreDataManager(container: githubDataModelContainer)
-        let githubDataModelManager = GithubDataModelManager(coreDataManager: githubCoreDataManager)
+        let githubDataModelManagerInstance = GithubDataModelManager(coreDataManager: githubCoreDataManager)
         
         _githubManager = StateObject(wrappedValue: githubManagerInstance)
+        _githubDataModelManager = StateObject(wrappedValue: githubDataModelManagerInstance)
+        
         _searchUserViewModel = StateObject(wrappedValue: SearchUserViewModel(githubManager: githubManagerInstance,
-                                                                       githubDataModelManager: githubDataModelManager))
-        _userHistoryViewModel = StateObject(wrappedValue: SearchHistoryViewModel(githubDataModelManager: githubDataModelManager))
+                                                                       githubDataModelManager: githubDataModelManagerInstance))
+        _userHistoryViewModel = StateObject(wrappedValue: SearchHistoryViewModel(githubDataModelManager: githubDataModelManagerInstance))
     }
     
     var body: some Scene {
@@ -37,6 +41,7 @@ struct github_repo_list_viewerApp: App {
                 .environmentObject(searchUserViewModel)
                 .environmentObject(userHistoryViewModel)
                 .environmentObject(githubManager)
+                .environmentObject(githubDataModelManager)
         }
     }
 }

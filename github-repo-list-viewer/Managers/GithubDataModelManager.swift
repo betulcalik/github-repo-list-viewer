@@ -10,10 +10,12 @@ import Combine
 
 protocol GithubDataModelManagerProtocol {
     func saveUser(model: GetUserResponseModel)
+    func saveRepository(model: GetUserRepositoryResponseModel)
+    
     func fetchAllUsers() -> AnyPublisher<[User], Error>
 }
 
-final class GithubDataModelManager: GithubDataModelManagerProtocol {
+final class GithubDataModelManager: GithubDataModelManagerProtocol, ObservableObject {
     
     // MARK: Properties
     let coreDataManager: CoreDataManagerProtocol
@@ -53,6 +55,37 @@ final class GithubDataModelManager: GithubDataModelManagerProtocol {
             .store(in: &cancellables)
     }
     
+    func saveRepository(model: GetUserRepositoryResponseModel) {
+        let predicate = NSPredicate(format: "id == %d", model.id)
+        
+        coreDataManager.fetch(entity: Repository.self, predicate: predicate, sortDescriptors: nil)
+            .flatMap { [weak self] existingRepositories -> AnyPublisher<Bool, Error> in
+                guard let self = self else { return Empty().eraseToAnyPublisher() }
+                
+                if existingRepositories.isEmpty {
+                    return saveNewRepository(model: model)
+                }
+                
+                debugPrint("User with repository \(model.name) already exists.")
+                return Just(true)
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+            }
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    debugPrint("Error during fetch repository operation: \(error.localizedDescription)")
+                }
+            }, receiveValue: { success in })
+            .store(in: &cancellables)
+    }
+    
+    func fetchAllUsers() -> AnyPublisher<[User], Error> {
+        return coreDataManager.fetch(entity: User.self, predicate: nil, sortDescriptors: nil)
+    }
+    
     // MARK: Private Methods
     private func saveNewUser(model: GetUserResponseModel) -> AnyPublisher<Bool, Error> {
         coreDataManager.add(entity: User.self) { newUser in
@@ -67,7 +100,18 @@ final class GithubDataModelManager: GithubDataModelManagerProtocol {
         }
     }
     
-    func fetchAllUsers() -> AnyPublisher<[User], Error> {
-        return coreDataManager.fetch(entity: User.self, predicate: nil, sortDescriptors: nil)
+    private func saveNewRepository(model: GetUserRepositoryResponseModel) -> AnyPublisher<Bool, Error> {
+        coreDataManager.add(entity: Repository.self) { newRepository in
+            newRepository.id = Int64(model.id)
+            newRepository.name = model.name
+            newRepository.isPrivate = model.isPrivate ?? false
+            newRepository.desc = model.description
+           // newRepository.createdAt
+           // newRepository.updatedAt
+            newRepository.starCount = Int16(model.starCount ?? 0)
+            newRepository.language = model.language
+            newRepository.topics = model.topics
+            newRepository.watchers = Int16(model.watchers ?? 0)
+        }
     }
 }

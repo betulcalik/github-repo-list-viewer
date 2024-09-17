@@ -25,6 +25,7 @@ final class GithubManager: GithubManagerProtocol, ObservableObject {
     
     // MARK: Public Methods
     func getUser(model: GetUserRequestModel) -> AnyPublisher<GetUserResponseModel, NetworkError> {
+        // todo add enum
         networkManager.fetch(from: "/users/" + model.username)
     }
     

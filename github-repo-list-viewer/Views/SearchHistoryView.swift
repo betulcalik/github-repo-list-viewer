@@ -11,6 +11,7 @@ struct SearchHistoryView: View {
     
     @EnvironmentObject var viewModel: SearchHistoryViewModel
     @EnvironmentObject var githubManager: GithubManager
+    @EnvironmentObject var githubDataModelManager: GithubDataModelManager
     
     var body: some View {
         NavigationStack {
@@ -26,7 +27,8 @@ struct SearchHistoryView: View {
                         ForEach(viewModel.users) { user in
                             NavigationLink(
                                 destination: UserDetailView()
-                                    .environmentObject(UserDetailViewModel(user: user, githubManager: githubManager))
+                                    .environmentObject(UserDetailViewModel(user: user,
+                                                                           githubManager: githubManager, githubDataModelManager: githubDataModelManager))
                             ) {
                                 HStack {
                                     Image(systemName: "person")

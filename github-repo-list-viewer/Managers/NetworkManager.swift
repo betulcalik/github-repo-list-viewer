@@ -54,6 +54,7 @@ final class NetworkManager: NetworkManagerProtocol {
                     throw NetworkError.invalidResponse
                 }
                 
+                // todo update this
                 if !(200...299).contains(httpResponse.statusCode) {
                     throw NetworkError.serverError(statusCode: httpResponse.statusCode)
                 }

@@ -26,6 +26,7 @@ struct GetUserRepositoryRequestModel: Codable {
 }
 
 struct GetUserRepositoryResponseModel: Codable {
+    let id: Int
     let name: String?
     let isPrivate: Bool?
     let description: String?
@@ -36,7 +37,8 @@ struct GetUserRepositoryResponseModel: Codable {
     let topics: [String]?
     let watchers: Int?
     
-    init(name: String? = nil, isPrivate: Bool?, description: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, starCount: Int?, language: String? = nil, topics: [String]? = nil, watchers: Int?) {
+    init(id: Int, name: String? = nil, isPrivate: Bool?, description: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, starCount: Int?, language: String? = nil, topics: [String]? = nil, watchers: Int?) {
+        self.id = id
         self.name = name
         self.isPrivate = isPrivate
         self.description = description
@@ -49,6 +51,7 @@ struct GetUserRepositoryResponseModel: Codable {
     }
     
     enum CodingKeys: String, CodingKey {
+        case id
         case name
         case isPrivate = "private"
         case description

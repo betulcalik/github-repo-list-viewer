@@ -12,15 +12,17 @@ final class UserDetailViewModel: ObservableObject {
     
     // MARK: Properties
     private let githubManager: GithubManagerProtocol
+    private let githubDataModelManager: GithubDataModelManagerProtocol
     private var cancellables = Set<AnyCancellable>()
     
     @Published var user: User
     @Published var isLoading: Bool = false
     
     // MARK: Init
-    init(user: User, githubManager: GithubManagerProtocol) {
+    init(user: User, githubManager: GithubManagerProtocol, githubDataModelManager: GithubDataModelManagerProtocol) {
         self.user = user
         self.githubManager = githubManager
+        self.githubDataModelManager = githubDataModelManager
     }
     
     // MARK: Public Methods
