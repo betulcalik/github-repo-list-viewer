@@ -43,9 +43,9 @@ final class CoreDataManager: CoreDataManagerProtocol {
     
     // MARK: Public Methods
     func fetch<T: NSManagedObject>(entity: T.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> AnyPublisher<[T], Error> {
+        let mainContext = self.container.viewContext
+        
         return Future<[T], Error> { promise in
-            let mainContext = self.container.viewContext
-            
             mainContext.perform {
                 let request = T.fetchRequest()
                 request.predicate = predicate
