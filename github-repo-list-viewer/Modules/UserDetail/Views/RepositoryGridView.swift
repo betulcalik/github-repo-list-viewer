@@ -38,7 +38,7 @@ struct RepositoryGridView: View {
                             repositoryDetail(item: item)
                         }
                         .onAppear {
-                          //   Trigger fetchMoreRepositories when the last item appears
+                          // Trigger fetchMoreRepositories when the last item appears
                             if index == viewModel.repositories.count - 1 {
                                 viewModel.fetchMoreRepositories()
                             }

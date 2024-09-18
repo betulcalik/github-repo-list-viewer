@@ -18,22 +18,26 @@ struct SearchUserView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                if !networkMonitor.isConnected {
-                    BannerView(text: "no_internet_connection".localized())
-                        .transition(.slide)
+            ZStack {
+                Colors.backgroundColor
+                    .ignoresSafeArea()
+                
+                VStack {
+                    if !networkMonitor.isConnected {
+                        BannerView(text: "no_internet_connection".localized())
+                            .transition(.slide)
+                    }
+                    
+                    header
+                    
+                    VStack(spacing: 20) {
+                        usernameTextField
+                        searchButton
+                    }
+                    
+                    Spacer()
                 }
-                
-                header
-                
-                VStack(spacing: 20) {
-                    usernameTextField
-                    searchButton
-                }
-                
-                Spacer()
             }
-            .background(Colors.backgroundColor)
             .animation(.easeInOut, value: networkMonitor.isConnected)
             .alert(isPresented: $viewModel.showAlert) {
                 Alert(
@@ -54,7 +58,7 @@ struct SearchUserView: View {
                 if let user = viewModel.searchedUser {
                     UserDetailView()
                         .environmentObject(UserDetailViewModel(user: user,
-                                                               githubManager: githubManager, 
+                                                               githubManager: githubManager,
                                                                githubDataModelManager: githubDataModelManager))
                 }
             }

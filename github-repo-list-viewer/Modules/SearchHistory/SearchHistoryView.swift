@@ -16,14 +16,18 @@ struct SearchHistoryView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                if viewModel.users.isEmpty {
-                    userHistoryNotAvailable
-                } else {
-                    usersList
+            ZStack {
+                Colors.backgroundColor
+                    .ignoresSafeArea()
+                
+                VStack {
+                    if viewModel.users.isEmpty {
+                        userHistoryNotAvailable
+                    } else {
+                        usersList
+                    }
                 }
             }
-            .background(Colors.backgroundColor)
             .navigationTitle("search_history".localized())
             .onAppear {
                 viewModel.fetchUsers()

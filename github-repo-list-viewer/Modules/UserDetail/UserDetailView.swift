@@ -10,32 +10,38 @@ import SwiftUI
 struct UserDetailView: View {
     
     @EnvironmentObject var viewModel: UserDetailViewModel
+    @EnvironmentObject var networkMonitor: NetworkMonitor
     @State private var numberOfColumns: Int = 1
     
     var body: some View {
-        VStack {
-            if viewModel.repositories.isEmpty {
-                Text("no_repositories_found".localized())
-                    .font(.body)
-                    .foregroundStyle(Colors.textColor)
-                    .multilineTextAlignment(.center)
-                    .padding()
-            } else {
-                VStack(alignment: .leading) {
-                    HStack(spacing: 5) {
-                        layoutButton
-                        sortByStarCountButton
-                        sortByCreatedAtButton
-                        sortByUpdatedAtButton
-                    }
-                    
-                    Divider()
-                    
-                    RepositoryGridView(numberOfColumns: $numberOfColumns)
-                }
-            }
+        ZStack {
+            Colors.backgroundColor
+                .ignoresSafeArea()
             
-            Spacer()
+            VStack {
+                if viewModel.repositories.isEmpty {
+                    Text("no_repositories_found".localized())
+                        .font(.body)
+                        .foregroundStyle(Colors.textColor)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                } else {
+                    VStack(alignment: .leading) {
+                        HStack(spacing: 5) {
+                            layoutButton
+                            sortByStarCountButton
+                            sortByCreatedAtButton
+                            sortByUpdatedAtButton
+                        }
+                        
+                        Divider()
+                        
+                        RepositoryGridView(numberOfColumns: $numberOfColumns)
+                    }
+                }
+                
+                Spacer()
+            }
         }
         .navigationTitle("repositories".localized())
         .overlay {
@@ -44,6 +50,10 @@ struct UserDetailView: View {
             }
         }
         .onAppear {
+            if !networkMonitor.isConnected {
+                viewModel.fetchUserRepositoriesFromCoreData()
+            }
+            
             viewModel.fetchUserRepositories()
         }
     }
@@ -128,4 +138,5 @@ extension UserDetailView {
 #Preview {
     UserDetailView()
         .environmentObject(PreviewProvider.shared.userDetailViewModel)
+        .environmentObject(PreviewProvider.shared.networkMonitor)
 }
