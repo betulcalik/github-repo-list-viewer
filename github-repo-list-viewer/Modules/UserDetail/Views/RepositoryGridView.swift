@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RepositoryGridView: View {
     
-    let items: [RepositoryGridItemModel]
+    @EnvironmentObject var viewModel: UserDetailViewModel
     @Binding var numberOfColumns: Int
     
     private var gridColumns: [GridItem] {
@@ -20,9 +20,28 @@ struct RepositoryGridView: View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: gridColumns, spacing: 16) {
-                    ForEach(items) { item in
+                    ForEach(viewModel.repositories.indices, id: \.self) { index in
+                        let repository = viewModel.repositories[index]
+                        let item = RepositoryGridItemModel(
+                            name: repository.name,
+                            isPrivate: repository.isPrivate,
+                            description: repository.desc,
+                            createdAt: repository.createdAt,
+                            updatedAt: repository.updatedAt,
+                            starCount: Int(repository.starCount),
+                            language: repository.language,
+                            topics: repository.topics,
+                            watchers: Int(repository.watchers)
+                        )
+                        
                         NavigationLink(destination: destinationView(for: item)) {
                             repositoryDetail(item: item)
+                        }
+                        .onAppear {
+                          //   Trigger fetchMoreRepositories when the last item appears
+                            if index == viewModel.repositories.count - 1 {
+                                viewModel.fetchMoreRepositories()
+                            }
                         }
                     }
                 }
@@ -50,5 +69,6 @@ struct RepositoryGridView: View {
 }
 
 #Preview {
-    RepositoryGridView(items: PreviewProvider.shared.repositoryGridItems, numberOfColumns: .constant(3))
+    RepositoryGridView(numberOfColumns: .constant(3))
+        .environmentObject(PreviewProvider.shared.userDetailViewModel)
 }

@@ -15,7 +15,7 @@ struct UserDetailView: View {
     var body: some View {
         VStack {
             if viewModel.repositories.isEmpty {
-                Text("no_repositories_found")
+                Text("no_repositories_found".localized())
                     .font(.body)
                     .foregroundStyle(Colors.textColor)
                     .multilineTextAlignment(.center)
@@ -31,27 +31,21 @@ struct UserDetailView: View {
                     
                     Divider()
                     
-                    RepositoryGridView(
-                        items: viewModel.repositories.map { repository in
-                        RepositoryGridItemModel(
-                            name: repository.name,
-                            isPrivate: repository.isPrivate,
-                            description: repository.desc,
-                            createdAt: repository.createdAt,
-                            updatedAt: repository.updatedAt,
-                            starCount: Int(repository.starCount),
-                            language: repository.language,
-                            topics: repository.topics,
-                            watchers: Int(repository.watchers)
-                        )
-                    },
-                        numberOfColumns: $numberOfColumns)
+                    RepositoryGridView(numberOfColumns: $numberOfColumns)
                 }
             }
             
             Spacer()
         }
         .navigationTitle("repositories".localized())
+        .overlay {
+            if viewModel.isLoading {
+                LoadingView()
+            }
+        }
+        .onAppear {
+            viewModel.fetchUserRepositories()
+        }
     }
     
     private func imageName(for columns: Int) -> String {
