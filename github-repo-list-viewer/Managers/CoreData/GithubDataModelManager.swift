@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol GithubDataModelManagerProtocol {
-    func saveUser(model: GetUserResponseModel)
+    func saveUser(model: GetUserResponseModel) -> AnyPublisher<User, Error>
     func saveRepository(user: User, model: GetUserRepositoryResponseModel)
     func saveRepositories(user: User, models: [GetUserRepositoryResponseModel])
     
@@ -31,31 +31,23 @@ final class GithubDataModelManager: GithubDataModelManagerProtocol, ObservableOb
     }
     
     // MARK: Public Methods
-    func saveUser(model: GetUserResponseModel) {
+    func saveUser(model: GetUserResponseModel) -> AnyPublisher<User, Error> {
         let predicate = NSPredicate(format: "username == %@", model.username)
         
-        coreDataManager.fetch(entity: User.self, predicate: predicate, sortDescriptors: nil)
-            .flatMap { [weak self] existingUsers -> AnyPublisher<Bool, Error> in
-                guard let self = self else { return Empty().eraseToAnyPublisher() }
+        return coreDataManager.fetch(entity: User.self, predicate: predicate, sortDescriptors: nil)
+            .flatMap { [weak self] existingUsers -> AnyPublisher<User, Error> in
+                guard let self = self else { return Fail(error: NSError(domain: "", code: 0, userInfo: nil)).eraseToAnyPublisher() }
                 
-                if existingUsers.isEmpty {
-                    return saveNewUser(model: model)
+                if let existingUser = existingUsers.first {
+                    debugPrint("User with username \(model.username) already exists.")
+                    return Just(existingUser)
+                        .setFailureType(to: Error.self)
+                        .eraseToAnyPublisher()
+                } else {
+                    return self.saveNewUser(model: model)
                 }
-                
-                debugPrint("User with username \(model.username) already exists.")
-                return Just(true)
-                    .setFailureType(to: Error.self)
-                    .eraseToAnyPublisher()
             }
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    debugPrint("Error during fetch user operation: \(error.localizedDescription)")
-                }
-            }, receiveValue: { success in })
-            .store(in: &cancellables)
+            .eraseToAnyPublisher()
     }
     
     func fetchAllUsers() -> AnyPublisher<[User], Error> {
@@ -109,8 +101,8 @@ final class GithubDataModelManager: GithubDataModelManagerProtocol, ObservableOb
     }
     
     // MARK: Private Methods
-    private func saveNewUser(model: GetUserResponseModel) -> AnyPublisher<Bool, Error> {
-        coreDataManager.add(entity: User.self) { newUser in
+    private func saveNewUser(model: GetUserResponseModel) -> AnyPublisher<User, Error> {
+        return coreDataManager.add(entity: User.self) { newUser in
             newUser.username = model.username
             newUser.name = model.name
             newUser.company = model.company
@@ -121,6 +113,15 @@ final class GithubDataModelManager: GithubDataModelManagerProtocol, ObservableOb
             newUser.followingCount = Int32(model.followingCount ?? 0)
             newUser.createdAt = Date()
         }
+        .flatMap { _ in
+            // Fetch the newly created user
+            let predicate = NSPredicate(format: "username == %@", model.username)
+            return self.coreDataManager.fetch(entity: User.self, predicate: predicate, sortDescriptors: nil)
+                .compactMap { $0.first }
+                .mapError { $0 as Error }
+                .eraseToAnyPublisher()
+        }
+        .eraseToAnyPublisher()
     }
     
     private func saveNewRepository(user: User, model: GetUserRepositoryResponseModel) -> AnyPublisher<Bool, Error> {

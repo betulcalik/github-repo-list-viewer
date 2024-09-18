@@ -48,7 +48,8 @@ extension SearchHistoryView {
                 NavigationLink(
                     destination: UserDetailView()
                         .environmentObject(UserDetailViewModel(user: user,
-                                                               githubManager: githubManager, githubDataModelManager: githubDataModelManager))
+                                                               githubManager: githubManager,
+                                                               githubDataModelManager: githubDataModelManager))
                 ) {
                     HStack {
                         Image(systemName: "person")

@@ -17,7 +17,10 @@ final class SearchUserViewModel: ObservableObject {
     
     @Published var isLoading: Bool = false
     @Published var showAlert: Bool = false
+    @Published var searchedUser: User?
     @Published var getUserError: NetworkError?
+    
+    @Published var shouldNavigateToDetail: Bool = false
     
     // MARK: Init
     init(githubManager: GithubManagerProtocol, githubDataModelManager: GithubDataModelManagerProtocol) {
@@ -46,8 +49,27 @@ final class SearchUserViewModel: ObservableObject {
                 }
             }, receiveValue: { [weak self] response in
                 guard let self = self else { return }
-                githubDataModelManager.saveUser(model: response)
+                saveUser(model: response)
             })
             .store(in: &cancellables)
     }
+    
+    // MARK: Private Methods
+    private func saveUser(model: GetUserResponseModel) {
+        githubDataModelManager.saveUser(model: model)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    debugPrint("Error saving user: \(error)")
+                    self?.showAlert = true
+                }
+            }, receiveValue: { [weak self] user in
+                self?.searchedUser = user
+                self?.shouldNavigateToDetail = true
+            })
+            .store(in: &cancellables)
+        }
 }

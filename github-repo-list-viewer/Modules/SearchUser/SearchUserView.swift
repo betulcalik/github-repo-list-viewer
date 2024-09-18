@@ -11,6 +11,9 @@ struct SearchUserView: View {
     
     @EnvironmentObject var viewModel: SearchUserViewModel
     @EnvironmentObject var networkMonitor: NetworkMonitor
+    @EnvironmentObject var githubManager: GithubManager
+    @EnvironmentObject var githubDataModelManager: GithubDataModelManager
+    
     @State private var username: String = ""
     
     var body: some View {
@@ -46,6 +49,14 @@ struct SearchUserView: View {
             }
             .onTapGesture {
                 UIApplication.shared.endEditing(true)
+            }
+            .navigationDestination(isPresented: $viewModel.shouldNavigateToDetail) {
+                if let user = viewModel.searchedUser {
+                    UserDetailView()
+                        .environmentObject(UserDetailViewModel(user: user,
+                                                               githubManager: githubManager, 
+                                                               githubDataModelManager: githubDataModelManager))
+                }
             }
         }
     }
