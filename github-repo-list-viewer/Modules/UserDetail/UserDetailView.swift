@@ -36,7 +36,8 @@ struct UserDetailView: View {
                         
                         Divider()
                         
-                        RepositoryGridView(numberOfColumns: $numberOfColumns)
+                        RepositoryGridView(viewModel: viewModel,
+                                           numberOfColumns: $numberOfColumns)
                     }
                 }
                 
@@ -55,8 +56,6 @@ struct UserDetailView: View {
         .onChange(of: networkMonitor.isConnected) {
             if !networkMonitor.isConnected {
                 viewModel.fetchUserRepositoriesFromCoreData()
-            } else {
-                viewModel.resetPagination()
             }
         }
     }

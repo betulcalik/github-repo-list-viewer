@@ -64,8 +64,11 @@ extension SearchHistoryView {
                     }
                     .frame(height: 36)
                 }
+                .padding(6)
+                .listRowBackground(Color.clear)
             }
-        }.listStyle(PlainListStyle())
+        }
+        .listStyle(PlainListStyle())
     }
 }
 

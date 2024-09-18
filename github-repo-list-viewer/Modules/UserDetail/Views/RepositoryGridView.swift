@@ -9,8 +9,8 @@ import SwiftUI
 
 struct RepositoryGridView: View {
     
+    @ObservedObject var viewModel: UserDetailViewModel
     @EnvironmentObject var networkMonitor: NetworkMonitor
-    @EnvironmentObject var viewModel: UserDetailViewModel
     @Binding var numberOfColumns: Int
     
     private var gridColumns: [GridItem] {
@@ -21,8 +21,7 @@ struct RepositoryGridView: View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: gridColumns, spacing: 16) {
-                    ForEach(viewModel.repositories.indices, id: \.self) { index in
-                        let repository = viewModel.repositories[index]
+                    ForEach(viewModel.repositories) { repository in
                         let item = RepositoryGridItemModel(
                             name: repository.name,
                             isPrivate: repository.isPrivate,
@@ -38,12 +37,10 @@ struct RepositoryGridView: View {
                         NavigationLink(destination: destinationView(for: item)) {
                             repositoryDetail(item: item)
                         }
-                        .onAppear {
-                          // Trigger fetchMoreRepositories when the last item appears
-                            if networkMonitor.isConnected {
-                                if index == viewModel.repositories.count - 1 {
-                                    viewModel.fetchMoreRepositories()
-                                }
+                        .task {
+                            // Trigger fetchMoreRepositories when the last item appears
+                            if repository == viewModel.repositories.last {
+                                viewModel.fetchMoreRepositories()
                             }
                         }
                     }
@@ -72,7 +69,7 @@ struct RepositoryGridView: View {
 }
 
 #Preview {
-    RepositoryGridView(numberOfColumns: .constant(3))
-        .environmentObject(PreviewProvider.shared.userDetailViewModel)
+    RepositoryGridView(viewModel: PreviewProvider.shared.userDetailViewModel,
+                       numberOfColumns: .constant(3))
         .environmentObject(PreviewProvider.shared.networkMonitor)
 }
