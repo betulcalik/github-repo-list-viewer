@@ -31,7 +31,6 @@ struct RepositoryGridView: View {
                 .padding()
             }
         }
-        .navigationTitle("repositories".localized())
     }
     
     private func repositoryDetail(item: RepositoryGridItemModel) -> some View {
@@ -48,6 +47,7 @@ struct RepositoryGridView: View {
     @ViewBuilder
     private func destinationView(for item: RepositoryGridItemModel) -> some View {
         RepositoryDetailView(item: item)
+            .navigationTitle("repository_detail".localized())
     }
 }
 

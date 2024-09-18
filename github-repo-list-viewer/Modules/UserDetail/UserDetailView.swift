@@ -14,7 +14,7 @@ struct UserDetailView: View {
     var body: some View {
         VStack {
             if viewModel.repositories.isEmpty {
-                Text("No repositories found")
+                Text("no_repositories_found")
                     .font(.body)
                     .foregroundStyle(Colors.textColor)
                     .multilineTextAlignment(.center)
@@ -24,7 +24,7 @@ struct UserDetailView: View {
                     RepositoryGridItemModel(
                         name: repository.name,
                         isPrivate: repository.isPrivate,
-                        description: repository.description,
+                        description: repository.desc,
                         createdAt: repository.createdAt,
                         updatedAt: repository.updatedAt,
                         starCount: Int(repository.starCount),
@@ -37,6 +37,7 @@ struct UserDetailView: View {
             
             Spacer()
         }
+        .navigationTitle("repositories".localized())
     }
 }
 

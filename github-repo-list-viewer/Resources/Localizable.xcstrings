@@ -1,6 +1,15 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "• %@" : {
+
+    },
+    "⭐ %lld" : {
+
+    },
+    "👁️ %lld" : {
+
+    },
     "client_error" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -8,6 +17,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Client error occurred: %d"
+          }
+        }
+      }
+    },
+    "created_at" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Created At: %@"
           }
         }
       }
@@ -45,9 +65,6 @@
           }
         }
       }
-    },
-    "Hello, World!" : {
-
     },
     "history" : {
       "extractionState" : "manual",
@@ -100,8 +117,16 @@
         }
       }
     },
-    "No repositories found" : {
-
+    "language" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language"
+          }
+        }
+      }
     },
     "no_internet_connection" : {
       "extractionState" : "manual",
@@ -110,6 +135,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No Internet Connection"
+          }
+        }
+      }
+    },
+    "no_repositories_found" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Repositories Found"
           }
         }
       }
@@ -131,6 +166,28 @@
         }
       }
     },
+    "private" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Private"
+          }
+        }
+      }
+    },
+    "public" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Public"
+          }
+        }
+      }
+    },
     "repositories" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -138,6 +195,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Repositories"
+          }
+        }
+      }
+    },
+    "repository_detail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repository Detail"
           }
         }
       }
@@ -210,6 +278,17 @@
         }
       }
     },
+    "topics" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Topics: %@"
+          }
+        }
+      }
+    },
     "unknown_error" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -240,6 +319,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bilinmeyen Kullanıcı"
+          }
+        }
+      }
+    },
+    "updated_at" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated At: %@"
           }
         }
       }
