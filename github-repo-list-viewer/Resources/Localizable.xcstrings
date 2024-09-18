@@ -46,6 +46,9 @@
         }
       }
     },
+    "Hello, World!" : {
+
+    },
     "history" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -97,6 +100,9 @@
         }
       }
     },
+    "No repositories found" : {
+
+    },
     "no_internet_connection" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -121,6 +127,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tamam"
+          }
+        }
+      }
+    },
+    "repositories" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repositories"
           }
         }
       }

@@ -21,6 +21,20 @@ final class PreviewProvider {
     let githubManager: GithubManager
     let githubDataModelManager: GithubDataModelManager
     
+    let mockUser: User
+    
+    let repositoryGridItems: [RepositoryGridItemModel] = [
+        .init(name: "Repository Name",
+              isPrivate: false,
+              description: "Repository Description",
+              createdAt: Date(),
+              updatedAt: Date(),
+              starCount: 10,
+              language: "Python",
+              topics: ["Python", "OpenCV"],
+              watchers: 10)
+    ]
+    
     private init() {
         networkMonitor = NetworkMonitor()
         
@@ -37,7 +51,7 @@ final class PreviewProvider {
         githubDataModelManager = GithubDataModelManager(coreDataManager: coreDataManager)
         
         let mockContext = persistentContainer.viewContext
-        let mockUser = User.mockUser(context: mockContext)
+        mockUser = User.mockUser(context: mockContext)
         
         searchUserViewModel = SearchUserViewModel(
             githubManager: githubManager,
