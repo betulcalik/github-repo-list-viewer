@@ -10,12 +10,10 @@ import SwiftUI
 struct RepositoryGridView: View {
     
     let items: [RepositoryGridItemModel]
+    @Binding var numberOfColumns: Int
+    
     private var gridColumns: [GridItem] {
-        [
-            GridItem(.flexible()), // First column
-            GridItem(.flexible()), // Second column
-            GridItem(.flexible())  // Third column
-        ]
+        Array(repeating: GridItem(.flexible()), count: numberOfColumns)
     }
     
     var body: some View {
@@ -52,5 +50,5 @@ struct RepositoryGridView: View {
 }
 
 #Preview {
-    RepositoryGridView(items: PreviewProvider.shared.repositoryGridItems)
+    RepositoryGridView(items: PreviewProvider.shared.repositoryGridItems, numberOfColumns: .constant(3))
 }
