@@ -27,6 +27,8 @@ final class UserDetailViewModel: ObservableObject {
         self.user = user
         self.githubManager = githubManager
         self.githubDataModelManager = githubDataModelManager
+        
+        fetchUserRepositories()
     }
     
     // MARK: Public Methods
@@ -55,7 +57,7 @@ final class UserDetailViewModel: ObservableObject {
                 }
             }, receiveValue: { [weak self] response in
                 guard let self = self else { return }
-                githubDataModelManager.saveRepositories(user: user, models: response)
+                githubDataModelManager.saveRepositories(user: self.user, models: response)
                 
                 DispatchQueue.main.async {
                     self.fetchUserRepositoriesFromCoreData()
@@ -85,6 +87,10 @@ final class UserDetailViewModel: ObservableObject {
                 self.repositories = repositories
             })
             .store(in: &cancellables)
+    }
+    
+    func resetPagination() {
+        currentPage = 1
     }
     
     func sortRepositoriesByCreatedAt() {

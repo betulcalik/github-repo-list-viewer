@@ -58,13 +58,12 @@ final class SearchUserViewModel: ObservableObject {
     private func saveUser(model: GetUserResponseModel) {
         githubDataModelManager.saveUser(model: model)
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
+            .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
                     break
                 case .failure(let error):
                     debugPrint("Error saving user: \(error)")
-                    self?.showAlert = true
                 }
             }, receiveValue: { [weak self] user in
                 self?.searchedUser = user

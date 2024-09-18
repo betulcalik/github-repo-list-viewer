@@ -4,7 +4,6 @@
 //
 //  Created by Betül Çalık on 13.09.2024.
 //
-
 import SwiftUI
 import CoreData
 
@@ -32,9 +31,13 @@ struct github_repo_list_viewerApp: App {
         _githubManager = StateObject(wrappedValue: githubManagerInstance)
         _githubDataModelManager = StateObject(wrappedValue: githubDataModelManagerInstance)
         
-        _searchUserViewModel = StateObject(wrappedValue: SearchUserViewModel(githubManager: githubManagerInstance,
-                                                                       githubDataModelManager: githubDataModelManagerInstance))
-        _searchHistoryViewModel = StateObject(wrappedValue: SearchHistoryViewModel(githubDataModelManager: githubDataModelManagerInstance))
+        _searchUserViewModel = StateObject(wrappedValue: SearchUserViewModel(
+            githubManager: githubManagerInstance,
+            githubDataModelManager: githubDataModelManagerInstance
+        ))
+        _searchHistoryViewModel = StateObject(wrappedValue: SearchHistoryViewModel(
+            githubDataModelManager: githubDataModelManagerInstance
+        ))
     }
     
     var body: some Scene {
@@ -48,4 +51,3 @@ struct github_repo_list_viewerApp: App {
         }
     }
 }
-

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RepositoryGridView: View {
     
+    @EnvironmentObject var networkMonitor: NetworkMonitor
     @EnvironmentObject var viewModel: UserDetailViewModel
     @Binding var numberOfColumns: Int
     
@@ -39,8 +40,10 @@ struct RepositoryGridView: View {
                         }
                         .onAppear {
                           // Trigger fetchMoreRepositories when the last item appears
-                            if index == viewModel.repositories.count - 1 {
-                                viewModel.fetchMoreRepositories()
+                            if networkMonitor.isConnected {
+                                if index == viewModel.repositories.count - 1 {
+                                    viewModel.fetchMoreRepositories()
+                                }
                             }
                         }
                     }
@@ -71,4 +74,5 @@ struct RepositoryGridView: View {
 #Preview {
     RepositoryGridView(numberOfColumns: .constant(3))
         .environmentObject(PreviewProvider.shared.userDetailViewModel)
+        .environmentObject(PreviewProvider.shared.networkMonitor)
 }

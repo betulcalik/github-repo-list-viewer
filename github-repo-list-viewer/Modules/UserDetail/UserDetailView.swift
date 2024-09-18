@@ -9,8 +9,8 @@ import SwiftUI
 
 struct UserDetailView: View {
     
-    @EnvironmentObject var viewModel: UserDetailViewModel
     @EnvironmentObject var networkMonitor: NetworkMonitor
+    @EnvironmentObject var viewModel: UserDetailViewModel
     @State private var numberOfColumns: Int = 1
     
     var body: some View {
@@ -50,11 +50,14 @@ struct UserDetailView: View {
             }
         }
         .onAppear {
+            viewModel.fetchUserRepositoriesFromCoreData()
+        }
+        .onChange(of: networkMonitor.isConnected) {
             if !networkMonitor.isConnected {
                 viewModel.fetchUserRepositoriesFromCoreData()
+            } else {
+                viewModel.resetPagination()
             }
-            
-            viewModel.fetchUserRepositories()
         }
     }
     
