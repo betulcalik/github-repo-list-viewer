@@ -93,4 +93,7 @@ extension SearchUserView {
 #Preview {
     SearchUserView()
         .environmentObject(PreviewProvider.shared.searchUserViewModel)
+        .environmentObject(PreviewProvider.shared.githubManager)
+        .environmentObject(PreviewProvider.shared.githubDataModelManager)
+        .environmentObject(PreviewProvider.shared.networkMonitor)
 }

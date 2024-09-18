@@ -12,6 +12,8 @@ final class PreviewProvider {
     
     static let shared = PreviewProvider()
     
+    let networkMonitor: NetworkMonitor
+    
     let searchUserViewModel: SearchUserViewModel
     let searchHistoryViewModel: SearchHistoryViewModel
     let userDetailViewModel: UserDetailViewModel
@@ -20,6 +22,8 @@ final class PreviewProvider {
     let githubDataModelManager: GithubDataModelManager
     
     private init() {
+        networkMonitor = NetworkMonitor()
+        
         let networkManager = NetworkManager(
             urlSession: URLSession.shared,
             baseURL: URL(string: "https://api.github.com")!,
