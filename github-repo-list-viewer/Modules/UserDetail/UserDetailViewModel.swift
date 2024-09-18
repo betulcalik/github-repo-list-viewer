@@ -85,4 +85,26 @@ final class UserDetailViewModel: ObservableObject {
             })
             .store(in: &cancellables)
     }
+    
+    func sortRepositoriesByCreatedAt() {
+        repositories.sort {
+            guard let date1 = $0.createdAt, let date2 = $1.createdAt else {
+                return false
+            }
+            return date1 < date2
+        }
+    }
+    
+    func sortRepositoriesByUpdatedAt() {
+        repositories.sort {
+            guard let date1 = $0.updatedAt, let date2 = $1.updatedAt else {
+                return false
+            }
+            return date1 < date2
+        }
+    }
+    
+    func sortRepositoriesByStarCount() {
+        repositories.sort { $0.starCount > $1.starCount }
+    }
 }

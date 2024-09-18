@@ -278,6 +278,15 @@
         }
       }
     },
+    "Sort by Created At" : {
+
+    },
+    "Sort by Stars" : {
+
+    },
+    "Sort by Updated At" : {
+
+    },
     "topics" : {
       "extractionState" : "manual",
       "localizations" : {

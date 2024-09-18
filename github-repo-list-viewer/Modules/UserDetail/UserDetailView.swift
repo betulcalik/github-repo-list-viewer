@@ -22,7 +22,12 @@ struct UserDetailView: View {
                     .padding()
             } else {
                 VStack(alignment: .leading) {
-                    layoutButton
+                    HStack(spacing: 5) {
+                        layoutButton
+                        sortByStarCountButton
+                        sortByCreatedAtButton
+                        sortByUpdatedAtButton
+                    }
                     
                     Divider()
                     
@@ -79,6 +84,50 @@ extension UserDetailView {
                 .cornerRadius(8)
         }
         .padding()
+    }
+    
+    private var sortByStarCountButton: some View {
+        Button(action: {
+            viewModel.sortRepositoriesByStarCount()
+        }) {
+            HStack {
+                Image(systemName: "star.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
+                    .foregroundStyle(.white)
+                
+                Text("Sort by Stars")
+                    .foregroundStyle(.white)
+            }
+            .padding(5)
+            .background(.accent)
+            .cornerRadius(8)
+        }
+    }
+    
+    private var sortByCreatedAtButton: some View {
+        Button(action: {
+            viewModel.sortRepositoriesByCreatedAt()
+        }) {
+            Text("Sort by Created At")
+                .foregroundStyle(.white)
+                .padding(5)
+                .background(.accent)
+                .cornerRadius(8)
+        }
+    }
+    
+    private var sortByUpdatedAtButton: some View {
+        Button(action: {
+            viewModel.sortRepositoriesByUpdatedAt()
+        }) {
+            Text("Sort by Updated At")
+                .foregroundStyle(.white)
+                .padding(5)
+                .background(.accent)
+                .cornerRadius(8)
+        }
     }
 }
 
