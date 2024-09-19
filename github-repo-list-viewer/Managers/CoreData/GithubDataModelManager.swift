@@ -39,7 +39,6 @@ final class GithubDataModelManager: GithubDataModelManagerProtocol, ObservableOb
                 guard let self = self else { return Fail(error: NSError(domain: "", code: 0, userInfo: nil)).eraseToAnyPublisher() }
                 
                 if let existingUser = existingUsers.first {
-                    debugPrint("User with username \(model.username) already exists.")
                     return Just(existingUser)
                         .setFailureType(to: Error.self)
                         .eraseToAnyPublisher()
@@ -72,7 +71,6 @@ final class GithubDataModelManager: GithubDataModelManagerProtocol, ObservableOb
                     return saveNewRepository(user: user, model: model)
                 }
                 
-                debugPrint("User with repository \(model.id) already exists.")
                 return Just(true)
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
