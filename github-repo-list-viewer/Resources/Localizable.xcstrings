@@ -18,6 +18,12 @@
             "state" : "translated",
             "value" : "Client error occurred: %d"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İstemci hatası oluştu: %d"
+          }
         }
       }
     },
@@ -28,6 +34,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Created At: %@"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oluşturuldu: %@"
           }
         }
       }
@@ -125,6 +137,12 @@
             "state" : "translated",
             "value" : "Language"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dil"
+          }
         }
       }
     },
@@ -136,6 +154,12 @@
             "state" : "translated",
             "value" : "No Internet Connection"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İnternet bağlantısı yok."
+          }
         }
       }
     },
@@ -145,6 +169,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No Repositories Found"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Depo Bulunamadı"
           }
         }
       }
@@ -174,6 +204,12 @@
             "state" : "translated",
             "value" : "Private"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gizli"
+          }
         }
       }
     },
@@ -184,6 +220,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Public"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Açık"
           }
         }
       }
@@ -196,6 +238,12 @@
             "state" : "translated",
             "value" : "Repositories"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Depolar"
+          }
         }
       }
     },
@@ -206,6 +254,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Repository Detail"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Depo Detayı"
           }
         }
       }
@@ -278,14 +332,50 @@
         }
       }
     },
-    "Sort by Created At" : {
-
+    "sort_by_created_at" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sort by Created At"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sırala: Oluşturulma"
+          }
+        }
+      }
     },
-    "Sort by Stars" : {
-
+    "sort_by_stars" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sort by Stars"
+          }
+        }
+      }
     },
-    "Sort by Updated At" : {
-
+    "sort_by_updated_at" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sort by Updated At"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sırala: Güncelleme"
+          }
+        }
+      }
     },
     "topics" : {
       "extractionState" : "manual",
@@ -294,6 +384,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Topics: %@"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konular: %@"
           }
         }
       }
@@ -339,6 +435,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Updated At: %@"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Güncellendi: %@"
           }
         }
       }

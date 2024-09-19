@@ -103,7 +103,7 @@ extension UserDetailView {
                     .frame(width: 24, height: 24)
                     .foregroundStyle(.white)
                 
-                Text("Sort by Stars")
+                Text("sort_by_stars".localized())
                     .foregroundStyle(.white)
             }
             .padding(5)
@@ -116,7 +116,7 @@ extension UserDetailView {
         Button(action: {
             viewModel.sortRepositoriesByCreatedAt()
         }) {
-            Text("Sort by Created At")
+            Text("sort_by_created_at".localized())
                 .foregroundStyle(.white)
                 .padding(5)
                 .background(.accent)
@@ -128,7 +128,7 @@ extension UserDetailView {
         Button(action: {
             viewModel.sortRepositoriesByUpdatedAt()
         }) {
-            Text("Sort by Updated At")
+            Text("sort_by_updated_at".localized())
                 .foregroundStyle(.white)
                 .padding(5)
                 .background(.accent)
