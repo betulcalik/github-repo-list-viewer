@@ -41,9 +41,9 @@ final class APIKeyManager {
 
 The project makes use of the following network requests:
 1. Fetch user data:
-   ```swift
+```swift
    networkManager.fetch(from: "/" + Path.users.rawValue + "/" + model.username, queryParameters: nil)
-   ```
+```
 2. Fetch user repositories:
 ```swift
 networkManager.fetch(from: "/" + Path.users.rawValue + "/" + model.username + "/" + Path.repos.rawValue,
