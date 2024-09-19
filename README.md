@@ -60,19 +60,24 @@ Users can list repositories with various columns and sort them based on:
 
 <img src="https://github.com/user-attachments/assets/28e4ca1c-7433-4679-83c2-e09761bbf932" width="200" alt="Screenshot">
 
-## Testing
+### Testing
 
 The project includes unit tests for the following components:
 
-- **NetworkManagerTests**: Tests the `NetworkManager` class using mock data. Includes:
-  - **`testFetchSuccess`**: Verifies successful data fetching from the mock API.
-  - **`testPostSuccess`**: Verifies successful posting of data to the mock API.
+- **NetworkManagerTests**:
+  - `testFetchSuccess`: Verifies successful data fetching from the mock API.
+  - `testPostSuccess`: Verifies successful posting of data to the mock API.
 
-- **SearchUserViewModelTests**: Tests the `SearchUserViewModel` class, covering:
-  - **`testGetUserSuccess`**: Checks successful user retrieval and handling.
-  - **`testGetUserFailure`**: Verifies the handling of user retrieval failure.
-  - **`testSaveUserSuccess`**: Validates successful saving of user data to Core Data.
-  - **`testSaveUserFailure`**: Tests the handling of save failure scenarios.
+- **SearchUserViewModelTests**:
+  - `testGetUserSuccess`: Checks successful user retrieval and handling.
+  - `testGetUserFailure`: Verifies the handling of user retrieval failure.
+  - `testSaveUserSuccess`: Validates successful saving of user data to Core Data.
+  - `testSaveUserFailure`: Tests the handling of save failure scenarios.
+
+- **UserDetailViewModelTests**:
+  - `testSortRepositoriesByStarCount`: Ensures repositories are sorted correctly by star count.
+  - `testSortRepositoriesByCreatedAt`: Ensures repositories are sorted correctly by creation date (oldest first).
+  - `testSortRepositoriesByUpdatedAt`: Ensures repositories are sorted correctly by last update date (oldest first).
 
 ## Security
 
