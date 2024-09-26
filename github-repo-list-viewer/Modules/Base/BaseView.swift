@@ -34,4 +34,5 @@ struct BaseView: View {
         .environmentObject(PreviewProvider.shared.userDetailViewModel)
         .environmentObject(PreviewProvider.shared.githubManager)
         .environmentObject(PreviewProvider.shared.githubDataModelManager)
+        .environmentObject(PreviewProvider.shared.networkMonitor)
 }
